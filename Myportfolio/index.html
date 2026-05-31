@@ -444,6 +444,24 @@ body::before {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+/* --- CẬP NHẬT: CON TRỎ CHUỘT PIXEL RETRO --- */
+/* Con trỏ mặc định (Hình mũi tên hồng) */
+body, html {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="%23f0b8cc" stroke="%23241830" stroke-width="1.5"><path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.42c.45 0 .67-.54.35-.85L5.5 3.21z"/></svg>') 0 0, auto !important;
+}
+
+/* Con trỏ khi trỏ vào link/nút (Hình mũi tên xanh) */
+a, button, .koi, .char, .xbtn, .xmi, .xtbtn, .dot, .gi, .tbi {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="%235ab0f8" stroke="%23241830" stroke-width="1.5"><path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.42c.45 0 .67-.54.35-.85L5.5 3.21z"/></svg>') 0 0, pointer !important;
+}
+
+/* --- CẬP NHẬT: HIỆU ỨNG KHI ĐANG KÉO THẢ NHÂN VẬT --- */
+.char.dragging {
+  animation: none !important; /* Dừng nhấp nhô khi đang bị túm */
+  transform: scale(1.1) rotate(-5deg); /* Phóng to và nghiêng nhẹ */
+  filter: drop-shadow(0 15px 25px rgba(200, 100, 180, 0.6));
+  z-index: 999 !important;
+}
 </style>
 </head>
 <body>
