@@ -85,9 +85,42 @@ body.night #main::after, body.night #abt::after {
 
 /* ─ TITLE centered ─ */
 #ttl{position:absolute;top:41%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;z-index:10;white-space:nowrap}
-#ttl .jp{font-family:'DotGothic16',monospace;font-size:11px;letter-spacing:.5em;color:var(--mu);display:block;margin-bottom:8px}
 #ttl .nm{display:block;font-size:clamp(32px,4vw,56px);font-weight:800;color:var(--deep);letter-spacing:.08em;text-shadow:0 2px 0 rgba(255,255,255,.65),0 0 30px rgba(200,150,220,.25)}
-#ttl .sb{font-family:'DotGothic16',monospace;font-size:11px;letter-spacing:.4em;color:var(--mu);display:block;margin-top:6px}
+/* --- TÙY CHỈNH CHỮ "PORTFOLIO" (Ở TRÊN) --- */
+#ttl .jp {
+  font-family: 'DotGothic16', monospace; /* Giữ nguyên font Pixel */
+  display: block;
+  
+  /* 1. ĐỔI KÍCH THƯỚC CHỮ */
+  font-size: 16px; 
+  letter-spacing: 0.6em; /* Khoảng cách giữa các chữ cái */
+  
+  /* 2. ĐỔI MÀU CHỮ */
+  color: #ffffff; /* Màu xanh pastel (bạn có thể đổi mã màu khác ở đây) */
+  text-shadow: 1px 1px 0 #241830; /* Viền đen mỏng để chữ nổi bật trên nền */
+  
+  /* 3. ĐỔI VỊ TRÍ (Lên/Xuống, Trái/Phải) */
+  /* Số đầu tiên là sang Trái/Phải. Số thứ hai là Lên/Xuống (âm là lên, dương là xuống) */
+  transform: translate(10px, 100px); 
+  margin-bottom: 10px;
+}
+/* --- TÙY CHỈNH CHỮ "CLICK THE FISH..." (Ở DƯỚI) --- */
+#ttl .sb {
+  font-family: 'DotGothic16', monospace;
+  display: block;
+  
+  /* 1. ĐỔI KÍCH THƯỚC CHỮ */
+  font-size: 13px; 
+  letter-spacing: 0.3em; 
+  
+  /* 2. ĐỔI MÀU CHỮ */
+  color: #ffffff; /* Đang để màu trắng */
+  text-shadow: 1px 1px 0 #241830; /* Viền đen mỏng */
+  
+  /* 3. ĐỔI VỊ TRÍ */
+  transform: translate(45px, -150px); /* Đẩy chữ này xuống dưới thêm 20px */
+  margin-top: 10px;
+}
 .hint{position:absolute;font-family:'DotGothic16',monospace;font-size:10px;color:var(--mu);animation:blink 2.8s ease-in-out infinite;pointer-events:none;z-index:5}
 @keyframes blink{0%,100%{opacity:.25}50%{opacity:.85}}
 #ndots{position:absolute;bottom:3.5%;left:50%;transform:translateX(-50%);display:flex;gap:9px;z-index:10}
@@ -132,9 +165,56 @@ body.night #main::after, body.night #abt::after {
 
 /* Kích thước riêng cho Face (nằm ở trang about) */
 #cabt .char-img{width:580px;}
-.cbubble{position:absolute;bottom:calc(100%+8px);left:50%;transform:translateX(-50%);background:rgba(255,255,255,.95);border:1px solid var(--sk);border-radius:10px;padding:4px 12px;font-family:'DotGothic16',monospace;font-size:10px;color:var(--deep);white-space:nowrap;opacity:0;transition:all .25s;pointer-events:none;box-shadow:0 2px 8px rgba(200,120,180,.2)}
-.cbubble::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--sk)}
+/* --- CẬP NHẬT: TEXT NHÂN VẬT GIỐNG TÊN FILE (RETRO DESKTOP) --- */
 
+/* Xóa cái đuôi tam giác của bong bóng chat cũ */
+.cbubble::after {
+  display: none;
+}
+
+/* Trạng thái mặc định: Chữ luôn hiện, viền đen mỏng, nền trong suốt */
+.cbubble {
+  position: absolute;
+  background-color: transparent;
+  color: #FFFFFF;
+  text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+  font-family: 'DotGothic16', monospace;
+  font-size: 11px;
+  padding: 2px 4px;
+  border: 1px dotted transparent; 
+  border-radius: 0; 
+  white-space: nowrap; 
+  opacity: 1; 
+  pointer-events: none;
+  z-index: 20;
+  box-shadow: none; 
+  transition: none; /* Không dùng hiệu ứng mờ dần */
+  
+  /* Căn giữa tâm chữ theo tọa độ */
+  transform: translate(-50%, -50%);
+}
+
+/* Trạng thái Hover: Hiện nền xanh bôi đen, ẩn viền đen */
+.char:hover .cbubble {
+  background-color: #0000AA;
+  border-color: rgba(255, 255, 255, 0.7);
+  text-shadow: none;
+  transform: translate(-50%, -50%); /* Giữ nguyên transform để chữ không bị giật */
+}
+
+/* --- TÙY CHỈNH VỊ TRÍ RIÊNG CHO TỪNG CHỮ --- */
+
+/* 1. Vị trí chữ "Click me!" của hình đôi chân (Trang chính) */
+#cmain .cbubble {
+  top: 50%;   /* Chỉnh số này để đưa chữ LÊN/XUỐNG (Số nhỏ là lên cao, số lớn là xuống thấp) */
+  left: 50%;  /* Chỉnh số này để đưa chữ SANG TRÁI/PHẢI */
+}
+
+/* 2. Vị trí chữ "go back home" của hình khuôn mặt (Trang About) */
+#cabt .cbubble {
+  top: 75%;   /* Hạ chữ thấp xuống một chút so với khuôn mặt */
+  left: 50%;  /* Căn giữa theo chiều ngang */
+}
 /* ─ AESTHETIC FISHING FX ─ */
 #fsvg { position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:400; display:none; }
 /* Dây câu màu trắng mờ, nét đứt nhẹ nhàng */
@@ -542,7 +622,6 @@ a, button, .koi, .char, .xbtn, .xmi, .xtbtn, .dot, .gi, .tbi {
   <!-- ═══ MAIN SCENE ═══ -->
   <div id="main" class="scene">
     <div id="ttl">
-  <span class="jp"> Portfolio</span>
   <!-- Chèn ảnh vào đây thay cho chữ -->
   <img src="assets/works/thuyanngo.png" alt="Portfolio" class="title-img">
   <span class="sb">✦ click the fish · right-click to feed ✦</span>
@@ -835,7 +914,7 @@ class Koi{
     this.el.style.left=this.x+'%';this.el.style.top=y+'%';
   }
 }
-const FISH=[new Koi('k1',8,2,.10,3.2),new Koi('k2',68,20,-.09,2.6),new Koi('k3',28,39,.09,2.1)];
+const FISH=[new Koi('k1',8,2,.09,3.2),new Koi('k2',68,20,-.09,2.6),new Koi('k3',28,39,.09,2.1)];
 (function anim(ts){FISH.forEach(f=>f.tick(ts*.001));requestAnimationFrame(anim)})(0);
 
 // ── FISHING FX ────────────────────────────────────────────────────
@@ -859,11 +938,9 @@ async function fishingFX(fishEl){
   });
 }
 
-// ═══════════════════════════════════════════════════════════
 // WINDOW MANAGEMENT — ONE WINDOW AT A TIME
 // openW() and openContact() call closeAllWins() first → guaranteed single window
 // X buttons use inline onclick="closeW('cat')" for reliability
-// ═══════════════════════════════════════════════════════════
 let zTop=200;
 const CATS=['animation','film','others','contact'];
 const POS={animation:[65,45],film:[100,110],others:[50,175],contact:[80,120]};
