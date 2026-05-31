@@ -462,6 +462,52 @@ a, button, .koi, .char, .xbtn, .xmi, .xtbtn, .dot, .gi, .tbi {
   filter: drop-shadow(0 15px 25px rgba(200, 100, 180, 0.6));
   z-index: 999 !important;
 }
+/* --- CẬP NHẬT: TÊN FILE LUÔN HIỆN, HOVER MỚI CÓ NỀN XANH --- */
+
+/* Trạng thái mặc định: Chữ luôn hiện, nền trong suốt */
+.flabel {
+  position: absolute;
+  top: 100%; /* Nằm ngay dưới con cá */
+  left: 50%;
+  transform: translateX(-50%);
+  
+  background-color: transparent; /* Nền trong suốt */
+  color: #FFFFFF; /* Chữ màu trắng */
+  
+  /* Tạo viền đen mỏng xung quanh chữ (giống text desktop) để dễ đọc trên nền sáng */
+  text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+  
+  font-family: 'DotGothic16', monospace;
+  font-size: 11px;
+  padding: 2px 4px;
+  
+  /* Dành sẵn không gian viền trong suốt để khi hover khối chữ không bị "giật" kích thước */
+  border: 1px dotted transparent; 
+  border-radius: 0; 
+  
+  text-align: center;
+  white-space: nowrap; 
+  line-height: 1.2;
+  
+  opacity: 1; /* Chữ luôn luôn hiển thị */
+  pointer-events: none;
+  z-index: 20;
+  
+  box-shadow: none; 
+  transition: none; /* Bỏ hiệu ứng mờ dần để ra chất retro */
+}
+
+/* Trạng thái Hover: Bôi đen bằng nền xanh giống như đang "chọn" file */
+.koi:hover .flabel {
+  background-color: #0000AA; /* Khối nền xanh thẫm retro */
+  border-color: rgba(255, 255, 255, 0.7); /* Hiện viền đứt nét màu trắng */
+  
+  /* Bỏ viền đen của chữ vì nền xanh đã làm chữ đủ nổi bật rồi */
+  text-shadow: none; 
+  
+  /* Cố định vị trí, không cho chữ nhảy lên nữa */
+  transform: translateX(-50%); 
+}
 </style>
 </head>
 <body>
