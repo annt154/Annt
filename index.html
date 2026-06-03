@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Portfolio Thuy An Ngo </title>
+
+<style>
+:root{--sk:#f0b8cc;--deep:#241830;--mu:#8a7888;--wb:#ece9d8;--b1:#5ab0f8;--b2:#1870d4;--b3:#0834a0}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;font-family:'Shippori Mincho B1',serif}
+#cvs{position:fixed;inset:0;pointer-events:none;z-index:0}
+/* Chỉnh kích thước cho ảnh tiêu đề */
+/* Chỉnh kích thước và tạo hiệu ứng nhấp nhô cho ảnh tiêu đề */
+.title-img {
+  width: 700px; 
+  max-width: 90vw; 
+  height: auto;
+  display: block;
+  margin: 5px auto;
+  /* Thêm dòng này để gọi hiệu ứng */
+  animation: floatTitle 7.9s ease-in-out infinite; 
+}
+
+/* Định nghĩa chuyển động lên xuống */
+@keyframes floatTitle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); } /* -12px là độ cao nhảy lên, bạn có thể tăng/giảm số này */
+}
+/* ─ VIEWPORT ─ */
+#vp{width:200%;height:100vh;display:flex;transition:transform .95s cubic-bezier(.86,0,.07,1)}
+#vp.to-about{transform:translateX(-50%)}
+
+/* ─ SCENES ─ */
+.scene{width:50%;height:100vh;position:relative;overflow:hidden;background-color:#ede4f4}
+#main{
+  background-image:url('assets/works/wind1.png'); background-size:cover; background-position:center; */
+  background-image:radial-gradient(ellipse 60% 40% at 28% 20%,rgba(255,240,210,.42),transparent),radial-gradient(ellipse 50% 35% at 74% 65%,rgba(220,215,255,.32),transparent);
+}
+#abt{
+  background-image:url('assets/works/wind2.png'); background-size:cover; background-position:center; */
+  background-image:radial-gradient(ellipse 55% 40% at 68% 22%,rgba(255,230,220,.4),transparent),radial-gradient(ellipse 45% 35% at 20% 70%,rgba(200,215,255,.3),transparent);
+}
+.scene::before{content:'';position:absolute;inset:0;pointer-events:none;z-index:1;
+  background-image:url("assets/works/night1.png' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+  opacity:.45;mix-blend-mode:multiply}
+/* Ảnh nền buổi tối cho trang chính */
+/* Tạo một lớp phủ chứa ảnh ban đêm, mặc định tàng hình (opacity: 0) */
+#main::after, #abt::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0; /* Nằm ngay trên nền cũ, dưới các layer khác */
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out; /* Hiệu ứng mờ dần siêu mượt trong 1.2 giây */
+  pointer-events: none;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Gắn ảnh ban đêm tương ứng cho từng trang */
+#main::after {
+  background-image: url('assets/works/night1.png');
+}
+#abt::after {
+  background-image: url('assets/works/night2.png');
+}
+
+/* Khi bấm nút chuyển sang ban đêm, lớp phủ từ từ hiện lên */
+body.night #main::after, body.night #abt::after {
+  opacity: 1;
+}
+/* ─ CLOUDS / ELEMENTS ─ */
+.cl{position:absolute;pointer-events:none;z-index:2;animation:cdrift linear infinite}
+@keyframes cdrift{from{transform:translateX(-240px)}to{transform:translateX(calc(50vw+240px))}}
+.mts{position:absolute;bottom:0;left:0;right:0;pointer-events:none;z-index:2}
+.ts{position:absolute;bottom:0;pointer-events:none;z-index:3}
+/* Giấu hoa mặc định */
+.pt{position:absolute;pointer-events:none;z-index:6; display:none; animation:pfall linear infinite}
+
+/* Khi có class "falling", hoa mới hiện ra và bắt đầu rơi */
+#main.falling .pt { display:block; }
+@keyframes pfall{0%{transform:translate(0,-20px)rotate(0);opacity:0}8%{opacity:.8}90%{opacity:.3}100%{transform:translate(55px,104vh)rotate(520deg);opacity:0}}
+#moon,#moon2{position:absolute;top:8%;right:9%;width:52px;height:52px;border-radius:50%;background:#f8f0d0;box-shadow:0 0 18px rgba(240,200,80,.35),0 0 50px rgba(240,200,80,.15);pointer-events:auto; cursor:pointer;z-index:3}
+#moon2{right:auto;left:6%;top:7%;width:44px;height:44px}
+
+/* ─ TITLE centered ─ */
+#ttl{position:absolute;top:41%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;z-index:10;white-space:nowrap}
+#ttl .nm{display:block;font-size:clamp(32px,4vw,56px);font-weight:800;color:var(--deep);letter-spacing:.08em;text-shadow:0 2px 0 rgba(255,255,255,.65),0 0 30px rgba(200,150,220,.25)}
+/* --- TÙY CHỈNH CHỮ "PORTFOLIO" (Ở TRÊN) --- */
+#ttl .jp {
+  font-family: 'DotGothic16', monospace; /* Giữ nguyên font Pixel */
+  display: block;
+  
+  /* 1. ĐỔI KÍCH THƯỚC CHỮ */
+  font-size: 16px; 
+  letter-spacing: 0.6em; /* Khoảng cách giữa các chữ cái */
+  
+  /* 2. ĐỔI MÀU CHỮ */
+  color: #ffffff; /* Màu xanh pastel (bạn có thể đổi mã màu khác ở đây) */
+  text-shadow: 1px 1px 0 #241830; /* Viền đen mỏng để chữ nổi bật trên nền */
+  
+  /* 3. ĐỔI VỊ TRÍ (Lên/Xuống, Trái/Phải) */
+  /* Số đầu tiên là sang Trái/Phải. Số thứ hai là Lên/Xuống (âm là lên, dương là xuống) */
+  transform: translate(10px, 100px); 
+  margin-bottom: 10px;
+}
+/* --- TÙY CHỈNH CHỮ "CLICK THE FISH..." (Ở DƯỚI) --- */
+#ttl .sb {
+  font-family: 'DotGothic16', monospace;
+  display: block;
+  
+  /* 1. ĐỔI KÍCH THƯỚC CHỮ */
+  font-size: 13px; 
+  letter-spacing: 0.3em; 
+  
+  /* 2. ĐỔI MÀU CHỮ */
+  color: #ffffff; /* Đang để màu trắng */
+  text-shadow: 1px 1px 0 #241830; /* Viền đen mỏng */
+  
+  /* 3. ĐỔI VỊ TRÍ */
+  transform: translate(45px, -150px); /* Đẩy chữ này xuống dưới thêm 20px */
+  margin-top: 10px;
+}
+.hint{position:absolute;font-family:'DotGothic16',monospace;font-size:10px;color:var(--mu);animation:blink 2.8s ease-in-out infinite;pointer-events:none;z-index:5}
+@keyframes blink{0%,100%{opacity:.25}50%{opacity:.85}}
+#ndots{position:absolute;bottom:3.5%;left:50%;transform:translateX(-50%);display:flex;gap:9px;z-index:10}
+.dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.4);border:1px solid rgba(180,140,190,.5);cursor:pointer;transition:all .25s}
+.dot.on{background:var(--sk);border-color:var(--sk)}
+#feedhint{position:absolute;bottom:7%;right:2%;z-index:5;font-family:'DotGothic16',monospace;font-size:9px;color:var(--mu);animation:blink 3s ease-in-out infinite}
+
+/* ─ FISH ─ */
+.koi{position:absolute;cursor:pointer;z-index:7;transition:filter .25s}
+.koi:hover{filter:brightness(1.18) drop-shadow(0 0 14px rgba(255,170,210,.9))}
+.koi:hover .flabel{opacity:1;transform:translateX(-50%)translateY(-4px)}
+.fish-body{display:block;line-height:0;animation:bwave-r 1.3s ease-in-out infinite}
+.koi.left .fish-body{animation:bwave-l 1.3s ease-in-out infinite}
+@keyframes bwave-r{0%,100%{transform:scaleX(1) rotate(.8deg)}50%{transform:scaleX(1) rotate(-.8deg)}}
+@keyframes bwave-l{0%,100%{transform:scaleX(-1)rotate(.8deg)}50%{transform:scaleX(-1)rotate(-.8deg)}}
+.koi.turn-l .fish-body{animation:turnL .38s ease-in-out forwards!important}
+.koi.turn-r .fish-body{animation:turnR .38s ease-in-out forwards!important}
+@keyframes turnL{0%{transform:scaleX(1) scaleY(1)}40%{transform:scaleX(.04)scaleY(1.22)}60%{transform:scaleX(-.04)scaleY(1.22)}100%{transform:scaleX(-1)scaleY(1)}}
+@keyframes turnR{0%{transform:scaleX(-1)scaleY(1)}40%{transform:scaleX(-.04)scaleY(1.22)}60%{transform:scaleX(.04)scaleY(1.22)}100%{transform:scaleX(1) scaleY(1)}}
+.koi.caught .fish-body{animation:caught-r .65s ease-out forwards!important}
+.koi.caught.left .fish-body{animation:caught-l .65s ease-out forwards!important}
+@keyframes caught-r{0%{transform:scaleX(1)scale(1)}25%{transform:scaleX(1)scale(1.35)translateY(-14px)}50%{transform:scaleX(1)scale(1.1)translateY(-20px)}75%{transform:scaleX(1)scale(1.2)translateY(-9px)}100%{transform:scaleX(1)scale(1)}}
+@keyframes caught-l{0%{transform:scaleX(-1)scale(1)}25%{transform:scaleX(-1)scale(1.35)translateY(-14px)}50%{transform:scaleX(-1)scale(1.1)translateY(-20px)}75%{transform:scaleX(-1)scale(1.2)translateY(-9px)}100%{transform:scaleX(-1)scale(1)}}
+#k1 .fish-img,#k1 .fish-svg{width:274px}
+#k2 .fish-img,#k2 .fish-svg{width:210px}
+#k3 .fish-img,#k3 .fish-svg{width:252px}
+.fish-img{height:auto;display:block}.fish-svg{display:block}
+.flabel{position:absolute;top:-28px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.93);color:var(--deep);font-family:'DotGothic16',monospace;font-size:10px;padding:3px 12px;border-radius:12px;white-space:nowrap;border:1px solid var(--sk);opacity:0;transition:all .25s;pointer-events:none;box-shadow:0 2px 8px rgba(200,120,180,.2)}
+.fshadow{position:absolute;bottom:-12px;left:50%;width:90px;height:8px;transform:translateX(-50%);border-radius:50%;background:rgba(80,60,140,.1);filter:blur(5px);pointer-events:none}
+
+/* ─ CHARACTER ─ */
+.char{position:absolute;cursor:pointer;z-index:8;animation:chfl 3.4s ease-in-out infinite;transition:filter .2s}
+.char:hover{filter:brightness(1.08) drop-shadow(0 4px 12px rgba(200,100,180,.4))}
+.char:hover .cbubble{opacity:1;transform:translateX(-50%)translateY(-4px)}
+@keyframes chfl{0%,100%{transform:translateY(0)}30%{transform:translateY(-2px)}}
+.char-body{position:relative;line-height:}
+/* Thuộc tính chung cho ảnh nhân vật */
+.char-img{height:auto;display:block}
+
+/* Kích thước riêng cho Legs (nằm ở trang chính) */
+#cmain .char-img{width:500px;} 
+
+/* Kích thước riêng cho Face (nằm ở trang about) */
+#cabt .char-img{width:580px;}
+/* --- CẬP NHẬT: TEXT NHÂN VẬT GIỐNG TÊN FILE (RETRO DESKTOP) --- */
+
+/* Xóa cái đuôi tam giác của bong bóng chat cũ */
+.cbubble::after {
+  display: none;
+}
+
+/* Trạng thái mặc định: Chữ luôn hiện, viền đen mỏng, nền trong suốt */
+.cbubble {
+  position: absolute;
+  background-color: transparent;
+  color: #FFFFFF;
+  text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+  font-family: 'DotGothic16', monospace;
+  font-size: 11px;
+  padding: 2px 4px;
+  border: 1px dotted transparent; 
+  border-radius: 0; 
+  white-space: nowrap; 
+  opacity: 1; 
+  pointer-events: none;
+  z-index: 20;
+  box-shadow: none; 
+  transition: none; /* Không dùng hiệu ứng mờ dần */
+  
+  /* Căn giữa tâm chữ theo tọa độ */
+  transform: translate(-50%, -50%);
+}
+
+/* Trạng thái Hover: Hiện nền xanh bôi đen, ẩn viền đen */
+.char:hover .cbubble {
+  background-color: #0000AA;
+  border-color: rgba(255, 255, 255, 0.7);
+  text-shadow: none;
+  transform: translate(-50%, -50%); /* Giữ nguyên transform để chữ không bị giật */
+}
+
+/* --- TÙY CHỈNH VỊ TRÍ RIÊNG CHO TỪNG CHỮ --- */
+
+/* 1. Vị trí chữ "Click me!" của hình đôi chân (Trang chính) */
+#cmain .cbubble {
+  top: 50%;   /* Chỉnh số này để đưa chữ LÊN/XUỐNG (Số nhỏ là lên cao, số lớn là xuống thấp) */
+  left: 50%;  /* Chỉnh số này để đưa chữ SANG TRÁI/PHẢI */
+}
+
+/* 2. Vị trí chữ "go back home" của hình khuôn mặt (Trang About) */
+#cabt .cbubble {
+  top: 75%;   /* Hạ chữ thấp xuống một chút so với khuôn mặt */
+  left: 50%;  /* Căn giữa theo chiều ngang */
+}
+/* ─ AESTHETIC FISHING FX ─ */
+#fsvg { position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:400; display:none; }
+/* Dây câu màu trắng mờ, nét đứt nhẹ nhàng */
+#fline { 
+  stroke: rgba(255, 255, 255, 0.3); 
+  stroke-width: 0.5; /* Nét siêu mỏng */
+  stroke-dasharray: none; /* Nét liền */
+}
+#fbob { fill: #fff; filter: drop-shadow(0 0 6px #f0b8cc); stroke: none; }
+
+/* Chữ Catch thanh lịch */
+.catch-txt {
+  position: fixed; transform: translate(-50%,-50%);
+  font-family: 'Shippori Mincho B1', serif; /* Font chữ Nhật có chân */
+  font-size: 16px; color: white;
+  letter-spacing: 0.15em; font-style: italic;
+  text-shadow: 0 0 10px rgba(240, 184, 204, 0.9);
+  z-index: 500; pointer-events: none;
+  animation: aestheticCatch 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+@keyframes aestheticCatch {
+  0% { opacity: 0; transform: translate(-50%,-40%) scale(0.9); }
+  20% { opacity: 1; transform: translate(-50%,-60%) scale(1.05); }
+  80% { opacity: 0.8; transform: translate(-50%,-90%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%,-100%) scale(0.95); }
+}
+
+/* Bọt nước lan tỏa mềm mại */
+.splash {
+  position: fixed; transform: translate(-50%,-50%);
+  border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 8px rgba(240, 184, 204, 0.5);
+  pointer-events: none; z-index: 499;
+  animation: aestheticSplash 1.2s ease-out forwards;
+}
+@keyframes aestheticSplash {
+  0% { width: 10px; height: 10px; opacity: 1; }
+  100% { width: 90px; height: 90px; opacity: 0; border-width: 0px; }
+}
+
+/* Thức ăn của cá (Viên sáng nhỏ) */
+.pellet {
+  position: absolute; width: 6px; height: 6px; border-radius: 50%;
+  background: #fff; transform: translate(-50%,-50%); z-index: 9;
+  animation: pdrp .35s ease-out; box-shadow: 0 0 6px #f0b8cc;
+}
+@keyframes pdrp { from { transform: translate(-50%,-150%) scale(.4); opacity: 0 } to { transform: translate(-50%,-50%) scale(1); opacity: 1 } }
+.pellet.eaten { animation: peat .45s ease-out forwards!important }
+@keyframes peat { 0% { transform: translate(-50%,-50%) scale(1); opacity: 1 } 50% { transform: translate(-50%,-50%) scale(2); opacity: .5 } 100% { transform: translate(-50%,-50%) scale(0); opacity: 0 } }
+
+/* ═══ XP CHROME (shared) ═══ */
+.xp{background:var(--wb);border:2px solid var(--b3);border-radius:8px 8px 3px 3px;box-shadow:3px 3px 0 var(--b3),2px 2px 14px rgba(0,0,60,.35),inset 0 0 0 1px rgba(255,255,255,.5);overflow:hidden}
+.xpbar{background:linear-gradient(180deg,var(--b1) 0%,var(--b2) 12%,var(--b3) 100%);padding:4px 6px;display:flex;align-items:center;gap:6px;user-select:none}
+.xp-ico{font-size:13px}.xp-ttl{flex:1;color:white;font-family:'DotGothic16',monospace;font-size:12px;font-weight:bold;text-shadow:1px 1px 2px rgba(0,0,80,.7)}
+.xbtn{width:21px;height:21px;border-radius:3px;border:1px solid rgba(0,0,0,.38);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:11px;font-weight:bold;font-family:'DotGothic16',monospace;flex-shrink:0;transition:filter .1s;user-select:none}
+.xbtn:hover{filter:brightness(1.2)}
+.mn{background:linear-gradient(180deg,#ffe880,#c8a400)}.mx{background:linear-gradient(180deg,#80e880,#1a8020)}
+.cl-btn{background:linear-gradient(180deg,#f08888,#d01818);color:white}
+.xmen{background:var(--wb);border-bottom:1px solid #aaa;padding:2px 4px;display:flex;gap:2px}
+.xmi{font-family:'DotGothic16',monospace;font-size:11px;padding:2px 8px;cursor:pointer;color:var(--deep);border-radius:2px;transition:all .1s}
+.xmi:hover{background:#316ac5;color:white}
+.xtb{background:linear-gradient(180deg,#ece9d8,#d4d0c8);border-bottom:1px solid #aaa;padding:3px 6px;display:flex;align-items:center;gap:5px}
+.xtbtn{font-family:'DotGothic16',monospace;font-size:10px;border:1px solid #999;background:linear-gradient(180deg,#fff,#d4d0c8);padding:2px 9px;cursor:pointer;border-radius:2px;color:var(--deep);transition:all .1s}
+.xtbtn:hover{background:#316ac5;color:white;border-color:var(--b3)}
+.xst{background:var(--wb);border-top:1px solid #aaa;padding:2px 8px;display:flex;gap:10px}
+.xsp{font-family:'DotGothic16',monospace;font-size:10px;color:#666;border:1px inset #ccc;padding:0 5px}
+
+/* ─ ABOUT WIN ─ */
+#awin{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(680px,88%);z-index:5}
+.abody{padding:18px;display:flex;gap:20px;align-items:flex-start}
+.polar{background:white;padding:10px 10px 42px;box-shadow:2px 4px 12px rgba(0,0,0,.22);transform:rotate(-2deg);flex-shrink:0;width:155px}
+.pbox{width:135px;height:135px;position:relative;overflow:hidden;background:linear-gradient(135deg,#f4c8d8,#d8c0f0,#c0d8f0);display:flex;align-items:center;justify-content:center;font-size:46px}
+.pbox img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pcap{text-align:center;margin-top:6px;font-family:'DotGothic16',monospace;font-size:10px;color:#888}
+.atxt{flex:1}.atxt h2{font-size:22px;font-weight:800;color:var(--deep);margin-bottom:2px}
+.jsub{font-family:'DotGothic16',monospace;font-size:11px;color:var(--mu);letter-spacing:.3em;margin-bottom:14px}
+.atxt p{font-family:'Noto Serif JP',serif;font-size:12px;line-height:1.9;color:#4a3a5a;margin-bottom:10px}
+.atags{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.tag{font-family:'DotGothic16',monospace;font-size:10px;padding:2px 10px;border:1px solid var(--sk);border-radius:20px;color:#8b6a8a;background:rgba(240,184,204,.12)}
+/* ─ PISCES GLASSMORPHISM (Kính mờ) ─ */
+.xp {
+  background: rgba(255, 255, 255, 0.45); /* Nền trong suốt 45% */
+  backdrop-filter: blur(12px); /* Làm mờ cảnh vật phía sau (sương mù) */
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6); /* Viền kính mỏng */
+  border-radius: 8px 8px 3px 3px;
+  box-shadow: 0 8px 32px rgba(36, 24, 48, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  overflow: hidden;
+}
+
+/* Làm trong suốt các phần lõi bên trong để kính phát huy tác dụng */
+.xmen, .xst, .abody, .contact-body, .pbody {
+  background: transparent !important; 
+}
+.xtb { background: rgba(255, 255, 255, 0.2) !important; border-bottom: 1px solid rgba(255,255,255,0.3); }
+/* ─ POPUP WINDOWS ─ */
+/* ONE AT A TIME enforced by JS — openW() closes all others before opening */
+.pop{position:fixed;z-index:100;display:none;width:min(999px,90vw)}
+.pop.open{display:block;animation:wopen .38s ease-out}
+@keyframes wopen{0%{transform:scale(.5)translateY(20px);opacity:0}65%{transform:scale(1.05);opacity:1}100%{transform:scale(1);opacity:1}}
+.dh{cursor:move}
+.pbody{padding:8px}
+/* ─ SCORPIO VHS GRAIN (Lớp nhiễu hạt) ─ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9998; /* Phủ lên toàn bộ trang, chỉ dưới màn hình loading */
+  pointer-events: none; /* Không cản trở việc click chuột */
+  opacity: 0.05; /* Rất mờ, tạo độ gai góc vừa đủ */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* ─ SCORPIO GLITCH EFFECT (Nhiễu sóng khi Hover) ─ */
+/* Sửa lại hiệu ứng hover của thư viện ảnh */
+.gi:hover .gthumb-img {
+  transform: scale(1.05);
+  animation: scorpioGlitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+}
+
+@keyframes scorpioGlitch {
+  0% { transform: translate(0) }
+  20% { transform: translate(-2px, 1px) }
+  40% { transform: translate(-1px, -1px) }
+  60% { transform: translate(2px, 1px) }
+  80% { transform: translate(1px, -1px) }
+  100% { transform: translate(0) }
+}
+
+/* Gallery grid */
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:4px}
+.gi{position:relative;cursor:pointer;overflow:hidden;border:2px solid transparent;border-radius:3px;aspect-ratio:16/10;transition:border-color .15s,transform .15s}
+.gi:hover{border-color:var(--sk);transform:scale(1.03)}
+.gthumb{position:relative;width:100%;height:100%;overflow:hidden}
+.gthumb-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .2s}
+.gi:hover .gthumb-img{transform:scale(1.07)}
+.gthumb-fb{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:3px}
+.gico{font-size:24px}
+.gtit{font-family:'DotGothic16',monospace;font-size:9px;color:rgba(255,255,255,.92);text-align:center;padding:0 4px;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.gov{position:absolute;inset:0;background:rgba(20,10,40,.52);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;font-family:'DotGothic16',monospace;font-size:10px;color:white}
+.gi:hover .gov{opacity:1}
+.gyr{position:absolute;bottom:4px;right:5px;font-family:'DotGothic16',monospace;font-size:9px;color:rgba(255,255,255,.75);background:rgba(0,0,0,.28);padding:1px 5px;border-radius:8px}
+
+/* ─ CONTACT WINDOW ─ */
+#w-contact{width:min(520px,88vw)}
+.contact-body{padding:16px;display:flex;gap:16px;align-items:flex-start}
+.contact-left{width:130px;flex-shrink:0}
+.cpolar{background:white;padding:8px 8px 36px;box-shadow:2px 4px 10px rgba(0,0,0,.22);transform:rotate(-1.5deg)}
+.cpbox{width:114px;height:114px;position:relative;overflow:hidden;background:linear-gradient(135deg,#f4c8d8,#d8c0f0);display:flex;align-items:center;justify-content:center;font-size:40px}
+.cpbox img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cname{text-align:center;font-size:13px;font-weight:800;color:var(--deep);margin-top:6px}
+.crole{text-align:center;font-family:'DotGothic16',monospace;font-size:9px;color:var(--mu);letter-spacing:.08em;margin-top:2px}
+.contact-right{flex:1}
+.clinks{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
+.clink{font-family:'DotGothic16',monospace;font-size:10px;color:var(--deep);text-decoration:none;padding:5px 10px;border:1px solid rgba(180,140,190,.4);border-radius:3px;background:rgba(240,230,248,.5);transition:all .15s;display:flex;align-items:center;gap:7px;letter-spacing:.03em}
+.clink:hover{background:#316ac5;color:white;border-color:#316ac5}
+.clink .cl-icon{width:16px;text-align:center}
+.c-div{border:none;border-top:1px solid rgba(180,160,200,.35);margin:10px 0}
+.cform{display:flex;flex-direction:column;gap:6px}
+.cform-label{font-family:'DotGothic16',monospace;font-size:10px;color:var(--mu);margin-bottom:2px}
+.cinput{font-family:'DotGothic16',monospace;font-size:11px;padding:5px 8px;border:1px solid #bbb;background:#fafafa;outline:none;border-radius:2px;color:var(--deep);width:100%}
+.cinput:focus{border-color:var(--b2);background:white}
+.ctarea{resize:vertical;height:65px;font-family:'Noto Serif JP',serif}
+.csend{font-family:'DotGothic16',monospace;font-size:11px;padding:6px 18px;background:linear-gradient(180deg,var(--b1),var(--b2));color:white;border:1px solid var(--b3);border-radius:3px;cursor:pointer;align-self:flex-start;transition:filter .15s;margin-top:2px}
+.csend:hover{filter:brightness(1.12)}
+.csent-msg{font-family:'DotGothic16',monospace;font-size:10px;color:#2a8020;display:none;padding:4px 0}
+
+/* ─ DETAIL MODAL ─ */
+#dovl{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;background:rgba(8,4,20,.8);backdrop-filter:blur(5px)}
+#dovl.open{display:flex}
+#dpanel{width:min(760px,92vw);max-height:88vh;display:flex;flex-direction:column;box-shadow:4px 4px 0 var(--b3),0 24px 60px rgba(0,0,60,.65);animation:wopen .4s ease-out}
+.dscroll{flex:1;overflow-y:auto;scroll-behavior:smooth}
+.dscroll::-webkit-scrollbar{width:5px}
+.dscroll::-webkit-scrollbar-thumb{background:#c0a8d8;border-radius:3px}
+.d-hero{position:relative;width:100%;aspect-ratio:16/8;overflow:hidden;display:flex;align-items:flex-end}
+.d-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.d-hero-fb{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:78px}
+.d-hero-ov{position:relative;z-index:2;background:linear-gradient(transparent,rgba(20,10,40,.75));width:100%;padding:20px 20px 16px}
+.d-badge{display:inline-block;font-family:'DotGothic16',monospace;font-size:10px;padding:2px 10px;border-radius:12px;border:1px solid rgba(240,184,204,.6);color:rgba(255,220,240,.9);background:rgba(240,184,204,.15);margin-bottom:8px}
+.d-htitle{font-size:26px;font-weight:800;color:white;text-shadow:0 2px 8px rgba(0,0,0,.5);margin-bottom:4px}
+.d-hyear{font-family:'DotGothic16',monospace;font-size:11px;color:rgba(255,220,240,.85)}
+.d-sec{padding:16px 22px}
+.d-desc{font-family:'Noto Serif JP',serif;font-size:13px;line-height:1.95;color:#4a3a5a}
+.d-imgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:0 22px 16px}
+.d-iitem{border-radius:3px;overflow:hidden;aspect-ratio:16/10;position:relative}
+.d-iitem img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .25s}
+.d-iitem:hover img{transform:scale(1.06)}
+.d-iitem-fb{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font-size:28px;background:rgba(200,180,220,.2)}
+.d-meta{display:grid;grid-template-columns:1fr 1fr;gap:7px 18px}
+.d-mk{font-family:'DotGothic16',monospace;font-size:10px;color:var(--mu);margin-bottom:1px}
+.d-mv{font-family:'DotGothic16',monospace;font-size:11px;color:var(--deep)}
+.d-tags{display:flex;flex-wrap:wrap;gap:5px;padding:4px 22px 16px}
+.d-tag{font-family:'DotGothic16',monospace;font-size:10px;padding:3px 10px;border:1px solid rgba(180,150,200,.45);border-radius:10px;color:#8060a0;background:rgba(200,180,240,.12)}
+.d-div{border:none;border-top:1px solid rgba(180,160,200,.3);margin:0 22px}
+
+/* ─ TASKBAR ─ */
+#tbar{position:fixed;bottom:0;left:0;right:0;height:30px;z-index:300;background:linear-gradient(180deg,#3a88d4,#1a5aac);border-top:1px solid #5ab0f8;display:flex;align-items:center;gap:4px;padding:0 4px}
+#startbtn{height:22px;padding:0 10px;border-radius:3px;border:1px solid #0040a0;background:linear-gradient(180deg,#5ac050,#1a8018);color:white;font-family:'DotGothic16',monospace;font-size:11px;cursor:pointer;display:flex;align-items:center;gap:4px;font-weight:bold}
+.tbsep{width:1px;height:18px;background:rgba(255,255,255,.22);margin:0 2px}
+.tbi{height:22px;padding:0 8px;border-radius:2px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.12);color:white;font-family:'DotGothic16',monospace;font-size:10px;cursor:pointer;display:none;align-items:center;gap:5px;white-space:nowrap;transition:all .15s}
+.tbi.vis{display:flex}
+.tbi:hover,.tbi.foc{background:rgba(255,255,255,.26);border-color:rgba(255,255,255,.5)}
+#tbclk{margin-left:auto;font-family:'DotGothic16',monospace;font-size:11px;color:white;padding:0 8px;border-left:1px solid rgba(255,255,255,.2);flex-shrink:0}
+
+/* ─ FABs ─ */
+.fab{position:fixed;top:14px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.85);border:1px solid var(--sk);font-size:15px;cursor:pointer;transition:all .2s;color:var(--deep);box-shadow:0 2px 8px rgba(200,120,180,.22);z-index:50}
+.fab:hover{background:var(--sk);color:white;transform:scale(1.08)}
+.fab.on{background:var(--sk);color:white}
+#pbtn{right:140px}#mbtn{right:98px}#tbtn{right:56px}#ctbtn{right:14px}
+
+/* ─ AESTHETIC BOOT SCREEN ─ */
+#boot-screen {
+  position: fixed; inset: 0; background-color: #fff; z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none;
+}
+.xp-boot-container {
+  display: flex; flex-direction: column; align-items: center; gap: 24px; 
+}
+
+/* Hiệu ứng nhịp đập nhẹ nhàng cho ảnh Logo */
+.boot-logo-img {
+  width: 220px; /* Chỉnh độ to nhỏ của logo ở đây */
+  max-width: 80vw;
+  height: auto;
+  object-fit: contain;
+  animation: pulseLogo 3s ease-in-out infinite; 
+}
+
+@keyframes pulseLogo {
+  0%, 100% { transform: scale(1); opacity: 0.85; }
+  50% { transform: scale(1.03); opacity: 1; }
+}
+
+/* Thanh loading bo góc tròn, viền mỏng và thanh thoát hơn */
+.xp-loading-box {
+  width: 140px; height: 10px; 
+  border: 1px solid rgba(200, 150, 180, 0.4); /* Viền màu tím/hồng nhạt */
+  border-radius: 10px; 
+  padding: 1px; position: relative; overflow: hidden;
+  background: #faf8fa;
+}
+.xp-loading-bar {
+  height: 100%; width: 35px; display: flex; gap: 2px;
+  animation: xpLoad 2s cubic-bezier(0.4, 0, 0.2, 1) infinite; /* Chuyển động mượt mà hơn */
+}
+/* Đổi màu ô vuông sang tone hồng đào đồng bộ với web */
+.xp-loading-bar .sq {
+  flex: 1; 
+  background: linear-gradient(180deg, #fce4ec, #f0b8cc); 
+  border-radius: 3px;
+}
+
+/* Chữ loading aesthetic dùng font Shippori Mincho */
+.boot-loading-text {
+  font-family: 'Shippori Mincho B1', serif; 
+  font-size: 11px;
+  color: #8a7888; /* Màu tím xám tiệp với theme */
+  letter-spacing: 0.3em;
+  margin-top: -10px;
+  animation: blinkText 2s infinite;
+}
+
+@keyframes xpLoad {
+  0% { transform: translateX(-40px); }
+  100% { transform: translateX(150px); }
+}
+@keyframes blinkText {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.9; }
+}
+
+.fade-out-boot { animation: hideBoot 1s ease-in-out forwards; }
+@keyframes hideBoot { to { opacity: 0; visibility: hidden; } }
+/* --- CẬP NHẬT: Cho phép cuộn Gallery --- */
+.pbody {
+  padding: 8px;
+  max-height: 55vh; /* Giới hạn chiều cao cửa sổ để bật thanh cuộn */
+  overflow-y: auto; /* Tự động hiện thanh cuộn dọc nếu nhiều project */
+}
+
+/* Tùy chỉnh thanh cuộn cho tone-sur-tone với giao diện */
+.pbody::-webkit-scrollbar { width: 5px; }
+.pbody::-webkit-scrollbar-thumb { background: #c0a8d8; border-radius: 3px; }
+
+/* --- CẬP NHẬT: Chữ luôn hiện trên ảnh Project --- */
+.gthumb-txt {
+  position: absolute;
+  bottom: 0; 
+  left: 0; 
+  right: 0;
+  background: linear-gradient(to top, rgba(20, 10, 40, 0.85) 0%, transparent 100%);
+  padding: 20px 6px 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  z-index: 2;
+  pointer-events: none; /* Không cản trở việc click vào ảnh */
+}
+.gthumb-txt .gico { font-size: 13px; }
+.gthumb-txt .gtit {
+  font-family: 'DotGothic16', monospace;
+  font-size: 10px;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* --- CẬP NHẬT: CON TRỎ CHUỘT PIXEL RETRO --- */
+/* Con trỏ mặc định (Hình mũi tên hồng) */
+body, html {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="%23f0b8cc" stroke="%23241830" stroke-width="1.5"><path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.42c.45 0 .67-.54.35-.85L5.5 3.21z"/></svg>') 0 0, auto !important;
+}
+
+/* Con trỏ khi trỏ vào link/nút (Hình mũi tên xanh) */
+a, button, .koi, .char, .xbtn, .xmi, .xtbtn, .dot, .gi, .tbi {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="%235ab0f8" stroke="%23241830" stroke-width="1.5"><path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.42c.45 0 .67-.54.35-.85L5.5 3.21z"/></svg>') 0 0, pointer !important;
+}
+
+/* --- CẬP NHẬT: HIỆU ỨNG KHI ĐANG KÉO THẢ NHÂN VẬT --- */
+.char.dragging {
+  animation: none !important; /* Dừng nhấp nhô khi đang bị túm */
+  transform: scale(1.1) rotate(-5deg); /* Phóng to và nghiêng nhẹ */
+  filter: drop-shadow(0 15px 25px rgba(200, 100, 180, 0.6));
+  z-index: 999 !important;
+}
+/* --- CẬP NHẬT: TÊN FILE LUÔN HIỆN, HOVER MỚI CÓ NỀN XANH --- */
+
+/* Trạng thái mặc định: Chữ luôn hiện, nền trong suốt */
+.flabel {
+  position: absolute;
+  top: 100%; /* Nằm ngay dưới con cá */
+  left: 50%;
+  transform: translateX(-50%);
+  
+  background-color: transparent; /* Nền trong suốt */
+  color: #FFFFFF; /* Chữ màu trắng */
+  
+  /* Tạo viền đen mỏng xung quanh chữ (giống text desktop) để dễ đọc trên nền sáng */
+  text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+  
+  font-family: 'DotGothic16', monospace;
+  font-size: 11px;
+  padding: 2px 4px;
+  
+  /* Dành sẵn không gian viền trong suốt để khi hover khối chữ không bị "giật" kích thước */
+  border: 1px dotted transparent; 
+  border-radius: 0; 
+  
+  text-align: center;
+  white-space: nowrap; 
+  line-height: 1.2;
+  
+  opacity: 1; /* Chữ luôn luôn hiển thị */
+  pointer-events: none;
+  z-index: 20;
+  
+  box-shadow: none; 
+  transition: none; /* Bỏ hiệu ứng mờ dần để ra chất retro */
+}
+
+/* Trạng thái Hover: Bôi đen bằng nền xanh giống như đang "chọn" file */
+.koi:hover .flabel {
+  background-color: #0000AA; /* Khối nền xanh thẫm retro */
+  border-color: rgba(255, 255, 255, 0.7); /* Hiện viền đứt nét màu trắng */
+  
+  /* Bỏ viền đen của chữ vì nền xanh đã làm chữ đủ nổi bật rồi */
+  text-shadow: none; 
+  
+  /* Cố định vị trí, không cho chữ nhảy lên nữa */
+  transform: translateX(-50%); 
+}
+
+</style>
+</head>
+<body>
+<canvas id="cvs"></canvas>
+<!-- Thêm nút hoa anh đào vào đây -->
+<button class="fab" id="pbtn" title="Sakura Rain">🌸</button>
+<button class="fab" id="mbtn" title="Ambient music">♪</button>
+<button class="fab" id="tbtn" title="Day / Night">🌙</button>
+<button class="fab" id="ctbtn" title="Contact" onclick="openContact()">✉</button>
+<svg id="fsvg"><line id="fline"/><circle id="fbob" r="5"/></svg>
+
+
+<div id="boot-screen">
+  <div class="xp-boot-container">
+    
+    <img src="assets/works/thuyanngo.png" alt="Welcome" class="boot-logo-img">
+    
+    <div class="xp-loading-box">
+      <div class="xp-loading-bar">
+        <div class="sq"></div><div class="sq"></div><div class="sq"></div>
+      </div>
+    </div>
+    
+    <div class="boot-loading-text">loading your world...</div>
+    
+  </div>
+</div>
+
+<div id="vp">
+
+  <!-- ═══ MAIN SCENE ═══ -->
+  <div id="main" class="scene">
+    <div id="ttl">
+  <!-- Chèn ảnh vào đây thay cho chữ -->
+  <img src="assets/works/thuyanngo.png" alt="Portfolio" class="title-img">
+  <span class="sb">✦ click the fish · right-click to feed ✦</span>
+</div>
+
+    <!-- FISH 1 – replace img src="./assets/fish-1.png" (facing RIGHT, transparent PNG) -->
+    <div class="koi" id="k1" data-cat="animation">
+      <div class="flabel">✦ ANIMATION</div>
+      <div class="fish-body">
+        <img src="assets/works/fish1.png" alt="" class="fish-img" draggable="false" onerror="this.style.display='none'">
+      </div><div class="fshadow"></div>
+    </div>
+    <!-- FISH 2 – replace img src="./assets/fish-2.png" -->
+    <div class="koi" id="k2" data-cat="film">
+      <div class="flabel">✦ FILM</div>
+      <div class="fish-body">
+        <img src="assets/works/fish2.png" alt="" class="fish-img" draggable="false" onerror="this.style.display='none'">
+      </div><div class="fshadow"></div>
+    </div>
+    <!-- FISH 3 – replace img src="./assets/fish-3.png" -->
+    <div class="koi" id="k3" data-cat="others">
+      <div class="flabel">✦ OTHERS</div>
+      <div class="fish-body">
+        <img src="assets/works/fish3.png" alt="" class="fish-img" draggable="false" onerror="this.style.display='none'">
+      </div><div class="fshadow"></div>
+    </div>
+
+    <!-- CHARACTER MAIN – replace img src="./assets/char-main.png" -->
+    <div class="char" id="cmain" style="right:0%;bottom:4.5%">
+      <div class="cbubble">Click me! ✦</div>
+      <div class="char-body">
+        <img src="assets/works/legs.png" alt="" class="char-img" draggable="false" onerror="this.style.display='none'">
+      </div>
+    </div>
+    <div class="hint" style="right:9%;bottom:calc(18%+138px)">▲ about me</div>
+    <div id="feedhint">right-click → feed fish 🐟</div>
+    <div id="ndots"><div class="dot on" data-i="0"></div><div class="dot" data-i="1"></div></div>
+  </div>
+
+  <!-- ═══ ABOUT SCENE ═══ -->
+  <div id="abt" class="scene">
+    <div id="awin" class="xp">
+      <div class="xpbar"><span class="xp-ico">🌸</span><span class="xp-ttl">About Me — Portfolio.exe</span><div class="xbtn mn">_</div><div class="xbtn mx">□</div><div class="xbtn cl-btn" onclick="goMain()">✕</div></div>
+      <div class="xmen"><span class="xmi">File</span><span class="xmi">Edit</span><span class="xmi">View</span><span class="xmi" onclick="openContact()">📮 Contact</span><span class="xmi">Help</span></div>
+      <div class="abody">
+        <div class="polar">
+          <div class="pbox">🌸<img src="assets/works/DSC03316.JPG" alt="" onerror="this.style.display='none'"></div>
+          <div class="pcap">Kobe 1/2025</div>
+        </div>
+        <div class="atxt">
+          <h2>Thuy An Ngo</h2>
+          <div class="jsub">RMIT Student</div>
+          <p>Hi! I'm a passionate animator and filmmaker. I create worlds through motion — from dreamy 2D animation to intimate short films.</p>
+          <p>Currently working on projects exploring nostalgia, nature, and quiet human moments. Based in Vietnam ✦</p>
+          <div class="atags"><span class="tag">Animation</span><span class="tag">Film</span><span class="tag">Illustration</span><span class="tag">After Effects</span><span class="tag">Premiere</span><span class="tag">Procreate</span></div>
+        </div>
+      </div>
+      <div class="xst"><span class="xsp">3 categories</span><span class="xsp" style="cursor:pointer" onclick="openContact()">📮 contact me</span></div>
+    </div>
+    <!-- CHARACTER ABOUT – replace img src="./assets/char-about.png" -->
+    <div class="char" id="cabt" style="left:0%;bottom:8%;animation-delay:-1.7s" onclick="goMain()">
+      <div class="cbubble">← go back home ✦</div>
+      <div class="char-body">
+        <img src="assets/works/face.png" alt="" class="char-img" draggable="false" onerror="this.style.display='none'">
+      </div>
+    </div>
+    <div class="hint" style="left:8%;bottom:calc(16%+128px)">click to go back ▲</div>
+  </div>
+</div>
+
+<!-- ═══ GALLERY POPUPS ═══ -->
+<div class="pop xp" id="w-animation">
+  <div class="xpbar dh" id="dg-animation"><span class="xp-ico">🎬</span><span class="xp-ttl">Animation — Works</span><div class="xbtn mn">_</div><div class="xbtn mx">□</div><div class="xbtn cl-btn" onclick="closeW('animation')">✕</div></div>
+  <div class="xmen"><span class="xmi">File</span><span class="xmi">Edit</span><span class="xmi">View</span><span class="xmi">Help</span></div>
+  <div class="xtb"><button class="xtbtn" onclick="navCat('animation',-1)">◀ Prev</button><button class="xtbtn" onclick="navCat('animation',1)">Next ▶</button><span style="flex:1"></span><span style="font-family:'DotGothic16',monospace;font-size:10px;color:#666">6 items</span></div>
+  <div class="pbody"><div class="gal" id="g-animation"></div></div>
+  <div class="xst"><span class="xsp">Animation</span><span class="xsp">6 objects</span></div>
+</div>
+<div class="pop xp" id="w-film">
+  <div class="xpbar dh" id="dg-film"><span class="xp-ico">📽️</span><span class="xp-ttl">Film — Works</span><div class="xbtn mn">_</div><div class="xbtn mx">□</div><div class="xbtn cl-btn" onclick="closeW('film')">✕</div></div>
+  <div class="xmen"><span class="xmi">File</span><span class="xmi">Edit</span><span class="xmi">View</span><span class="xmi">Help</span></div>
+  <div class="xtb"><button class="xtbtn" onclick="navCat('film',-1)">◀ Prev</button><button class="xtbtn" onclick="navCat('film',1)">Next ▶</button><span style="flex:1"></span><span style="font-family:'DotGothic16',monospace;font-size:10px;color:#666">6 items</span></div>
+  <div class="pbody"><div class="gal" id="g-film"></div></div>
+  <div class="xst"><span class="xsp">Film</span><span class="xsp">6 objects</span></div>
+</div>
+<div class="pop xp" id="w-others">
+  <div class="xpbar dh" id="dg-others"><span class="xp-ico">✨</span><span class="xp-ttl">Others — Works</span><div class="xbtn mn">_</div><div class="xbtn mx">□</div><div class="xbtn cl-btn" onclick="closeW('others')">✕</div></div>
+  <div class="xmen"><span class="xmi">File</span><span class="xmi">Edit</span><span class="xmi">View</span><span class="xmi">Help</span></div>
+  <div class="xtb"><button class="xtbtn" onclick="navCat('others',-1)">◀ Prev</button><button class="xtbtn" onclick="navCat('others',1)">Next ▶</button><span style="flex:1"></span><span style="font-family:'DotGothic16',monospace;font-size:10px;color:#666">6 items</span></div>
+  <div class="pbody"><div class="gal" id="g-others"></div></div>
+  <div class="xst"><span class="xsp">Others</span><span class="xsp">6 objects</span></div>
+</div>
+
+<!-- ═══ CONTACT POPUP ═══ -->
+<div class="pop xp" id="w-contact">
+  <div class="xpbar dh" id="dg-contact"><span class="xp-ico">📮</span><span class="xp-ttl">Contact — Portfolio.exe</span><div class="xbtn mn">_</div><div class="xbtn mx">□</div><div class="xbtn cl-btn" onclick="closeW('contact')">✕</div></div>
+  <div class="xmen"><span class="xmi">File</span><span class="xmi">Edit</span><span class="xmi">View</span><span class="xmi">Help</span></div>
+  <div class="xtb"><span style="font-family:'DotGothic16',monospace;font-size:10px;color:#666">📮 Get in touch</span></div>
+  <div class="contact-body">
+    <div class="contact-left">
+      <div class="cpolar">
+        <!-- replace photo -->
+        <div class="cpbox">🌸<img src="assets/works/DSC03316.JPG" alt="" onerror="this.style.display='none'"></div>
+      </div>
+      <div class="cname">Thuy An Ngo</div>
+      <div class="crole">Animator · Filmmaker<br>Based in Vietnam</div>
+    </div>
+    <div class="contact-right">
+      <div class="clinks">
+        <!-- Edit these links: -->
+        <a class="clink" href="mailto:nhduong1978@gmail.com"><span class="cl-icon">✉</span>nhduong1978@gmail.com</a>
+        <a class="clink" href="https://instagram.com/yourname" target="_blank"><span class="cl-icon">📸</span>@yourname</a>
+        <a class="clink" href="https://www.behance.net/thyanng1" target="_blank"><span class="cl-icon">🎨</span>behance.net/yourname</a>
+        <a class="clink" href="https://vimeo.com/yourname" target="_blank"><span class="cl-icon">🎬</span>vimeo.com/yourname</a>
+      </div>
+      <div class="c-div"></div>
+      <div class="cform">
+        <div class="cform-label">Send a message</div>
+        <input class="cinput" id="cf-name" placeholder="Thuy An Ngo">
+        <input class="cinput" id="cf-email" placeholder="nhduong1978@gmail.com">
+        <textarea class="cinput ctarea" id="cf-msg" placeholder="Your message..."></textarea>
+        <button class="csend" onclick="sendContact()">Send ✉</button>
+        <div class="csent-msg" id="csent">✦ Message sent! Thank you ✦</div>
+      </div>
+    </div>
+  </div>
+  <div class="xst"><span class="xsp">Open to commissions</span><span class="xsp">Response within 48h</span></div>
+</div>
+
+<!-- ═══ DETAIL MODAL ═══ -->
+<div id="dovl" onclick="closeDOvl(event)">
+  <div id="dpanel" class="xp">
+    <div class="xpbar"><span class="xp-ico" id="d-ico">🌸</span><span class="xp-ttl" id="d-wt">Work Detail</span><div class="xbtn mn">_</div><div class="xbtn mx">□</div><div class="xbtn cl-btn" onclick="closeDetail()">✕</div></div>
+    <div class="xmen"><span class="xmi">File</span><span class="xmi">Edit</span><span class="xmi" onclick="navD(-1)">◀ Previous</span><span class="xmi" id="d-ctr">1/6</span><span class="xmi" onclick="navD(1)">Next ▶</span></div>
+    <div class="dscroll" id="dscroll"></div>
+    <div class="xst"><span class="xsp" id="dst1">—</span><span class="xsp" id="dst2">—</span><span class="xsp" id="dst3">—</span></div>
+  </div>
+</div>
+
+<!-- ═══ TASKBAR ═══ -->
+<div id="tbar">
+  <button id="startbtn">🌸 Start</button>
+  <div class="tbsep"></div>
+  <div class="tbi" id="tb-animation" onclick="focusW('animation')"><span>🎬</span> Animation</div>
+  <div class="tbi" id="tb-film" onclick="focusW('film')"><span>📽️</span> Film</div>
+  <div class="tbi" id="tb-others" onclick="focusW('others')"><span>✨</span> Others</div>
+  <div class="tbi" id="tb-contact" onclick="focusW('contact')"><span>📮</span> Contact</div>
+  <div id="tbclk">—</div>
+</div>
+
+<script>
+// ── DATA ─────────────────────────────────────────────────────────
+const DATA={
+  animation:[
+    {id:'a1',ico:'🌸',title:'The Solar Cycle',year:'2026',dur:'2 min loop',bg:['#f5c8da','#c878a8'],cover:'./assets/works/a1-cover.jpg',imgs:['./assets/works/a1-1.jpg','./assets/works/a1-2.jpg','./assets/works/a1-3.jpg'],desc:'A meditative loop animation capturing the ephemeral beauty of sakura falling at dusk. Hand-drawn frame by frame at 24fps. Explores impermanence and mono no aware.',meta:{Type:'2D Animation',Tools:'Procreate · After Effects',Duration:'2 min loop',Status:'Completed'},tags:['Frame by Frame','24fps','Loop','Procreate','AE']},
+    {id:'a2',ico:'🌙',title:'Regret',year:'2024',dur:'3 min',bg:['#1c1050','#5030a0'],cover:'./assets/works/a2-cover.jpg',imgs:['./assets/works/a2-1.jpg','./assets/works/a2-2.jpg','./assets/works/a2-3.jpg'],desc:'A dreamy short following a paper boat on a moonlit river guided by fireflies. Being lost and finding beauty in unfamiliar paths.',meta:{Type:'2D / Compositing',Tools:'Procreate · AE · C4D',Duration:'3 min',Status:'Completed'},tags:['2D Animation','Compositing','Night']},
+    {id:'a3',ico:'🍃',title:'Uncanny Doll',year:'2025',dur:'1.5 min',bg:['#c0e0a8','#486820'],cover:'./assets/works/a3-cover.jpg',imgs:['./assets/works/a3-1.jpg','./assets/works/a3-2.jpg','./assets/works/a3-3.jpg'],desc:'Golden leaves spiral in slow descent. Focuses on weight, timing, and the beauty of natural physics in animation.',meta:{Type:'Frame by Frame',Tools:'Toon Boom · Photoshop',Duration:'1.5 min',Status:'Completed'},tags:['Toon Boom','Autumn','Nature']},
+    {id:'a4',ico:'✨',title:'Everything Everywhere',year:'2023',dur:'Seamless loop',bg:['#1a0830','#8038c0'],cover:'./assets/works/a4-cover.jpg',imgs:['./assets/works/a4-1.jpg','./assets/works/a4-2.jpg','./assets/works/a4-3.jpg'],desc:'Abstract particles exploring "ma" (間) — negative space. How emptiness itself can be expressive.',meta:{Type:'Motion Design',Tools:'After Effects · Expressions',Duration:'Loop',Status:'Completed'},tags:['Abstract','Particles','Motion']},
+    {id:'a5',ico:'🌊',title:'Fresh up',year:'2025',dur:'4 min',bg:['#88d0e8','#1850a0'],cover:'./assets/works/a5-cover.jpg',imgs:['./assets/works/a5-1.jpg','./assets/works/a5-2.jpg','./assets/works/a5-3.jpg'],desc:'Memory and the sea, inspired by childhood summers and Ghibli. 2D character animation with hand-painted watercolour backgrounds.',meta:{Type:'2D Character Anim',Tools:'Procreate · AE · Photoshop',Duration:'4 min',Status:'Completed'},tags:['Character Anim','Ghibli-inspired']},
+    {id:'a6',ico:'🏮',title:'Water : Out of Form',year:'2026',dur:'2 min',bg:['#f06030','#700800'],cover:'./assets/works/a6-cover.jpg',imgs:['./assets/works/a6-1.jpg','./assets/works/a6-2.jpg','./assets/works/a6-3.jpg'],desc:'Paper lanterns rise into the night sky through silhouettes and colored light. Music-driven, no dialogue.',meta:{Type:'Silhouette Animation',Tools:'After Effects · Illustrator',Duration:'2 min',Status:'Completed'},tags:['Silhouette','Music-driven','Festival']},
+  ],
+  film:[
+    {id:'f1',ico:'📽️',title:'EEG',year:'2024',dur:'5 min',bg:['#d0b888','#604820'],cover:'./assets/works/f1-cover.jpg',imgs:['./assets/works/f1-1.jpg','./assets/works/f1-2.jpg','./assets/works/f1-3.jpg'],desc:'A silent observational short: grandmother preparing tea in early Hà Nội. No score, no dialogue — only city sounds.',meta:{Type:'Observational Doc',Tools:'Sony A7III · Premiere',Duration:'5 min',Status:'Completed'},tags:['Documentary','Silent','Hanoi']},
+    {id:'f2',ico:'🌧️',title:'AP Art & Design',year:'2024',dur:'8 min',bg:['#2040a0','#0a1040'],cover:'./assets/works/f2-cover.jpg',imgs:['./assets/works/f2-1.jpg','./assets/works/f2-2.jpg','./assets/works/f2-3.jpg'],desc:'Two strangers share an umbrella bus stop. A quiet conversation about leaving hometowns.',meta:{Type:'Narrative Short',Tools:'Sony A7III · Premiere · DaVinci',Duration:'8 min',Status:'Completed'},tags:['Drama','Rain','Narrative']},
+    {id:'f3',ico:'🎋',title:'A B C story',year:'2023',dur:'3 min',bg:['#78a848','#203010'],cover:'./assets/works/f3-cover.jpg',imgs:['./assets/works/f3-1.jpg','./assets/works/f3-2.jpg','./assets/works/f3-3.jpg'],desc:'Experimental film through bamboo shadows. Pure texture and light — no narrative, only shadow, wind, and time.',meta:{Type:'Experimental',Tools:'iPhone Pro · DaVinci',Duration:'3 min',Status:'Completed'},tags:['Experimental','Texture','Light']},
+    {id:'f4',ico:'🚂',title:'Last Train',year:'2023',dur:'12 min',bg:['#c89040','#502800'],cover:'./assets/works/f4-cover.jpg',imgs:['./assets/works/f4-1.jpg','./assets/works/f4-2.jpg','./assets/works/f4-3.jpg'],desc:'A young woman on the last train, clutching an unsent letter. Tension between memory and present.',meta:{Type:'Narrative Short',Tools:'Sony A7III · Premiere · DaVinci',Duration:'12 min',Status:'Completed'},tags:['Drama','Train','Journey']},
+    {id:'f5',ico:'🕯️',title:'Winter Light',year:'2022',dur:'4 min',bg:['#b0c8d8','#304858'],cover:'./assets/works/f5-cover.jpg',imgs:['./assets/works/f5-1.jpg','./assets/works/f5-2.jpg','./assets/works/f5-3.jpg'],desc:'A meditation on solitude — a single candle lit each evening in an empty apartment. Inspired by Hopper.',meta:{Type:'Experimental Short',Tools:'Canon R50 · Premiere',Duration:'4 min',Status:'Completed'},tags:['Experimental','Solitude','Personal']},
+    {id:'f6',ico:'🌺',title:'Sakura Memory',year:'2022',dur:'15 min',bg:['#f4b8c8','#c04870'],cover:'./assets/works/f6-cover.jpg',imgs:['./assets/works/f6-1.jpg','./assets/works/f6-2.jpg','./assets/works/f6-3.jpg'],desc:'Two childhood friends return during sakura season. About the distance that quietly forms between people.',meta:{Type:'Narrative Short',Tools:'Sony A7III · Premiere · DaVinci',Duration:'15 min',Status:'Completed'},tags:['Drama','Friendship','Sakura']},
+  ],
+  others:[
+    {id:'o1',ico:'🎨',title:'The Odyssey',year:'2026',dur:'12 pieces',bg:['#e8c0f4','#8030c0'],cover:'assets/works/DSC03316.JPG',imgs:['./assets/works/o1-1.jpg','./assets/works/o1-2.jpg','./assets/works/o1-3.jpg'],desc:'Digital illustration series reimagining Vietnamese and Japanese folklore — ink wash meets vector precision.',meta:{Type:'Digital Illustration',Tools:'Procreate · Illustrator',Duration:'12 illus.',Status:'Ongoing'},tags:['Illustration','Folklore','Series']},
+    {id:'o2',ico:'✒️',title:'Dressup website',year:'2026',dur:'8 pieces',bg:['#e0d8c8','#201c14'],cover:'./assets/works/o2-cover.jpg',imgs:['./assets/works/o2-1.jpg','./assets/works/o2-2.jpg','./assets/works/o2-3.jpg'],desc:'Experimental typography combining kanji structural logic with Latin letterforms.',meta:{Type:'Typography',Tools:'Illustrator · Figma',Duration:'8 studies',Status:'Completed'},tags:['Typography','Design','Hybrid']},
+    {id:'o3',ico:'📷',title:'Street Archive',year:'2023',dur:'40 photos',bg:['#c8c8c8','#202020'],cover:'./assets/works/o3-cover.jpg',imgs:['./assets/works/o3-1.jpg','./assets/works/o3-2.jpg','./assets/works/o3-3.jpg'],desc:'Black and white street photography from Hà Nội, Kyoto, and Tokyo.',meta:{Type:'Photography',Tools:'Ricoh GR III · Lightroom',Duration:'40 photos',Status:'Completed'},tags:['Photography','B&W','Urban']},
+    {id:'o4',ico:'🌺',title:'Botanical Pattern',year:'2023',dur:'5 patterns',bg:['#f0e8d0','#906020'],cover:'./assets/works/o4-cover.jpg',imgs:['./assets/works/o4-1.jpg','./assets/works/o4-2.jpg','./assets/works/o4-3.jpg'],desc:'Surface patterns inspired by Edo-period woodblock botanical prints.',meta:{Type:'Pattern Design',Tools:'Procreate · Illustrator',Duration:'5 patterns',Status:'Available'},tags:['Pattern','Textile','Botanical']},
+    {id:'o5',ico:'🎐',title:'Sound Into Image',year:'2022',dur:'6 pieces',bg:['#b8f0e0','#106040'],cover:'./assets/works/o5-cover.jpg',imgs:['./assets/works/o5-1.jpg','./assets/works/o5-2.jpg','./assets/works/o5-3.jpg'],desc:'What does a sound look like? Six visual interpretations of field recordings.',meta:{Type:'Motion / Experimental',Tools:'After Effects · Illustrator',Duration:'6 pieces',Status:'Completed'},tags:['Motion','Experimental','Sound']},
+    {id:'o6',ico:'📓',title:'Field Notes Zine',year:'2022',dur:'32 pages',bg:['#eee0c8','#705828'],cover:'./assets/works/o6-cover.jpg',imgs:['./assets/works/o6-1.jpg','./assets/works/o6-2.jpg','./assets/works/o6-3.jpg'],desc:'A hand-drawn sketchbook into a physical zine. 32 pages risograph printed, edition of 50.',meta:{Type:'Zine / Mixed Media',Tools:'Procreate · Risograph',Duration:'32 pages',Status:'Sold out'},tags:['Zine','Sketchbook','Risograph']},
+  ]
+};
+
+// ── GALLERIES ─────────────────────────────────────────────────────
+function buildGalleries(){
+  ['animation','film','others'].forEach(cat=>{
+    const el=document.getElementById('g-'+cat);
+    
+    // Tạo danh sách ảnh và chữ on-top
+    el.innerHTML=DATA[cat].map(item=>`
+      <div class="gi" onclick="openDetail('${item.id}','${cat}')">
+        <div class="gthumb">
+          <img src="${item.cover}" alt="${item.title}" class="gthumb-img" draggable="false">
+          
+          <!-- Lớp phủ chứa Icon và Tựa đề luôn hiện -->
+          <div class="gthumb-txt">
+            <span class="gico">${item.ico}</span><span class="gtit">${item.title}</span>
+          </div>
+          
+          <!-- Lớp dự phòng khi ảnh lỗi -->
+          <div class="gthumb-fb" style="background:linear-gradient(135deg,${item.bg[0]},${item.bg[1]})">
+          </div>
+        </div>
+        <div class="gov">▶ Open</div><div class="gyr">${item.year}</div>
+      </div>`).join('');
+      
+    // Logic ẩn hiện fallback nếu ảnh lỗi
+    el.querySelectorAll('.gthumb-img').forEach(img=>{
+      img.addEventListener('load',()=>{if(img.naturalWidth>0)img.nextElementSibling.nextElementSibling.style.display='none'});
+      img.addEventListener('error',()=>{img.style.display='none';img.nextElementSibling.nextElementSibling.style.display='block'});
+    });
+
+    // Tự động cập nhật số lượng items trên thanh Toolbar
+    const win = document.getElementById('w-' + cat);
+    if(win) {
+        const itemStr = DATA[cat].length + ' items';
+        const objStr = DATA[cat].length + ' objects';
+        
+        // Cập nhật text hiển thị (Dùng querySelectorAll để tìm các text đếm số)
+        const textElements = win.querySelectorAll('.xtb span, .xsp');
+        textElements.forEach(span => {
+            if(span.textContent.includes('items')) span.textContent = itemStr;
+            if(span.textContent.includes('objects')) span.textContent = objStr;
+        });
+    }
+  });
+}
+buildGalleries();
+
+// ── STARS ─────────────────────────────────────────────────────────
+(function(){
+  const c=document.getElementById('cvs'),ctx=c.getContext('2d');
+  let W,H,S=[];
+  const resize=()=>{W=c.width=innerWidth;H=c.height=innerHeight;S=[];
+    for(let i=0;i<70;i++)S.push({x:Math.random()*W,y:Math.random()*H,r:.3+Math.random()*1.4,sp:.07+Math.random()*.22,dr:Math.random()*.28-.14,ph:Math.random()*Math.PI*2,fw:Math.random()>.65})};
+  resize();addEventListener('resize',resize);
+  const draw=()=>{ctx.clearRect(0,0,W,H);const night=document.body.classList.contains('night');
+    S.forEach(s=>{s.ph+=.018;s.y-=s.sp;s.x+=s.dr;if(s.y<-5){s.y=H+5;s.x=Math.random()*W}
+      const a=s.fw?(.3+.3*Math.sin(s.ph))*(night?.9:.45):(.4+.22*Math.sin(s.ph))*(night?.5:.25);
+      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle=s.fw?`rgba(200,240,150,${a})`:`rgba(220,200,255,${a})`;ctx.fill()});
+    requestAnimationFrame(draw)};draw();
+})();
+
+// ── PETALS ────────────────────────────────────────────────────────
+(()=>{const m=document.getElementById('main'),C=['#f0b8cc','#fce4ec','#e898c0','#f9d5e3','#f8c0d8'];
+  for(let i=0;i<28;i++){const d=document.createElement('div');d.className='pt';const s=7+Math.random()*10;
+    d.style.cssText=`left:${Math.random()*100}%;animation-duration:${7+Math.random()*9}s;animation-delay:${-Math.random()*18}s`;
+    d.innerHTML=`<svg width="${s}" height="${s}" viewBox="0 0 10 10"><ellipse cx="5" cy="5" rx="5" ry="3" fill="${C[i%5]}" opacity="${.5+Math.random()*.4}" transform="rotate(${Math.random()*360},5,5)"/></svg>`;
+    m.appendChild(d);}})();
+
+// ── KOI CLASS ─────────────────────────────────────────────────────
+class Koi{
+  constructor(id,x,y,vx,amp){
+    this.el=document.getElementById(id);
+    this.body=this.el.querySelector('.fish-body');
+    this.x=x;this.baseY=y;this.vx=vx;this.amp=amp;
+    this.ph=Math.random()*Math.PI*2;this.bspd=.6+Math.random()*.4;
+    this.turning=false;this.caught=false;this.food=null;
+    this.facing=vx>0?1:-1;
+    this.el.style.left=x+'%';this.el.style.top=y+'%';
+    if(this.facing===-1)this.el.classList.add('left');
+  }
+  turn(){
+    if(this.turning)return;
+    this.turning=true;
+    const cls=this.facing===1?'turn-l':'turn-r';
+    this.el.classList.add(cls);
+    setTimeout(()=>{
+      this.vx*=-1;this.facing*=-1;
+      // switch facing BEFORE removing turn class to avoid flash
+      if(this.facing===-1)this.el.classList.add('left');
+      else this.el.classList.remove('left');
+      this.el.classList.remove(cls);
+      this.turning=false;
+    },380);
+  }
+  playCaught(){this.caught=true;this.el.classList.add('caught');setTimeout(()=>{this.el.classList.remove('caught');this.caught=false},700)}
+  tick(t){
+    if(this.caught)return;
+    if(this.food){
+      const dx=this.food.x-this.x;
+      if(Math.abs(dx)<7){this.food.eat();this.food=null;}
+      else{const want=dx>0?1:-1;if(want!==this.facing&&!this.turning){this.turn();return;}
+        if(!this.turning)this.vx=want*Math.min(Math.abs(this.vx)*1.3,.35);
+        this.baseY+=(this.food.y-this.baseY)*.005;}
+    }
+    if(!this.turning){
+      if(this.x>90&&this.vx>0){this.turn();return;}
+      if(this.x<-16&&this.vx<0){this.turn();return;}
+    }
+    this.x+=this.vx;
+    const y=this.baseY+this.amp*Math.sin(t*this.bspd+this.ph);
+    this.el.style.left=this.x+'%';this.el.style.top=y+'%';
+  }
+}
+const FISH=[new Koi('k1',8,2,.09,3.2),new Koi('k2',68,20,-.09,2.6),new Koi('k3',28,39,.09,2.1)];
+(function anim(ts){FISH.forEach(f=>f.tick(ts*.001));requestAnimationFrame(anim)})(0);
+
+// ── FISHING FX ────────────────────────────────────────────────────
+async function fishingFX(fishEl){
+  return new Promise(res=>{
+    const koi=FISH.find(f=>f.el===fishEl);if(koi)koi.playCaught();
+    const cr=document.getElementById('cmain').getBoundingClientRect();
+    const fr=fishEl.getBoundingClientRect();
+    const x1=cr.right-10,y1=cr.top+25,x2=fr.left+fr.width/2,y2=fr.top+fr.height/2;
+    const sv=document.getElementById('fsvg'),ln=document.getElementById('fline'),bb=document.getElementById('fbob');
+    ln.setAttribute('x1',x1);ln.setAttribute('y1',y1);ln.setAttribute('x2',x2);ln.setAttribute('y2',y2);
+    bb.setAttribute('cx',x2);bb.setAttribute('cy',y2);sv.style.cssText='display:block;opacity:1;';
+    for(let i=0;i<4;i++){const r=document.createElement('div');r.className='splash';
+      r.style.cssText=`left:${x2}px;top:${y2}px;animation-delay:${i*.13}s`;
+      document.body.appendChild(r);setTimeout(()=>r.remove(),1000);}
+    const ct=document.createElement('div');ct.className='catch-txt';
+    ct.textContent='✦ Caught! ✦';ct.style.cssText=`left:${x2}px;top:${y2}px`;
+    document.body.appendChild(ct);setTimeout(()=>ct.remove(),1200);
+    setTimeout(()=>{sv.style.transition='opacity .3s';sv.style.opacity='0';
+      setTimeout(()=>{sv.style.cssText='display:none;';res()},320);},620);
+  });
+}
+
+// WINDOW MANAGEMENT — ONE WINDOW AT A TIME
+// openW() and openContact() call closeAllWins() first → guaranteed single window
+// X buttons use inline onclick="closeW('cat')" for reliability
+let zTop=200;
+const CATS=['animation','film','others','contact'];
+const POS={animation:[65,45],film:[100,110],others:[50,175],contact:[80,120]};
+
+function closeAllWins(){
+  CATS.forEach(c=>{
+    document.getElementById('w-'+c).classList.remove('open');
+    const tb=document.getElementById('tb-'+c);
+    if(tb)tb.classList.remove('vis','foc');
+  });
+}
+
+function openW(cat,t,l){
+  closeAllWins(); // ← closes EVERY other window first
+  const top=t!=null?t:POS[cat][0];
+  const left=l!=null?l:POS[cat][1];
+  const win=document.getElementById('w-'+cat);
+  win.style.top=top+'px';win.style.left=left+'px';win.style.zIndex=++zTop;
+  win.classList.add('open');
+  const tb=document.getElementById('tb-'+cat);
+  if(tb)tb.classList.add('vis','foc');
+}
+
+function closeW(cat){  // called by onclick="closeW('...')" — always works
+  document.getElementById('w-'+cat).classList.remove('open');
+  const tb=document.getElementById('tb-'+cat);
+  if(tb)tb.classList.remove('vis','foc');
+}
+
+function openContact(){openW('contact')}
+
+function focusW(cat){
+  const win=document.getElementById('w-'+cat);
+  if(win.classList.contains('open')){win.style.zIndex=++zTop;}
+  else{openW(cat);}
+  document.querySelectorAll('.tbi').forEach(t=>t.classList.remove('foc'));
+  const tb=document.getElementById('tb-'+cat);
+  if(tb)tb.classList.add('foc');
+}
+
+function navCat(cat,dir){
+  const GCATS=['animation','film','others']; // gallery cats only
+  const idx=GCATS.indexOf(cat);
+  const next=GCATS[(idx+dir+GCATS.length)%GCATS.length];
+  const win=document.getElementById('w-'+cat);
+  openW(next,parseInt(win.style.top)||POS[cat][0],parseInt(win.style.left)||POS[cat][1]);
+}
+
+// Fish click
+document.querySelectorAll('.koi').forEach(fish=>{
+  fish.addEventListener('click',async e=>{
+    e.stopPropagation();const cat=fish.dataset.cat;
+    closeAllWins();   // close old window IMMEDIATELY on click
+    await fishingFX(fish);
+    openW(cat);
+  });
+});
+
+// ── DRAG ──────────────────────────────────────────────────────────
+[...CATS].forEach(c=>{
+  const win=document.getElementById('w-'+c);
+  const bar=document.getElementById('dg-'+c);
+  if(!bar)return;
+  let drag=false,sx,sy,sl,st;
+  bar.addEventListener('mousedown',e=>{
+    if(e.target.classList.contains('xbtn')||e.target.classList.contains('cl-btn'))return;
+    drag=true;sx=e.clientX;sy=e.clientY;
+    sl=parseInt(win.style.left)||POS[c][1];st=parseInt(win.style.top)||POS[c][0];
+    win.style.zIndex=++zTop;e.preventDefault();
+  });
+  document.addEventListener('mousemove',e=>{if(!drag)return;
+    win.style.left=Math.max(0,sl+e.clientX-sx)+'px';
+    win.style.top=Math.max(0,st+e.clientY-sy)+'px';});
+  document.addEventListener('mouseup',()=>drag=false);
+});
+
+// ── DETAIL MODAL ──────────────────────────────────────────────────
+let dCat='',dIdx=0;
+function openDetail(id,cat){closeAllWins();dCat=cat;dIdx=DATA[cat].findIndex(x=>x.id===id);renderD();document.getElementById('dovl').classList.add('open')}
+function renderD(){
+  const it=DATA[dCat][dIdx];
+  document.getElementById('d-ico').textContent=it.ico;
+  document.getElementById('d-wt').textContent=it.title+' — '+dCat[0].toUpperCase()+dCat.slice(1);
+  document.getElementById('d-ctr').textContent=(dIdx+1)+'/'+DATA[dCat].length;
+  document.getElementById('dst1').textContent=it.title.toLowerCase().replace(/ /g,'_')+'.mp4';
+  document.getElementById('dst2').textContent=it.year;document.getElementById('dst3').textContent=it.meta.Status||'—';
+  const s=document.getElementById('dscroll');s.scrollTop=0;
+  s.innerHTML=`
+    <div class="d-hero">
+      <img class="d-hero-img" src="${it.cover}" alt="${it.title}" onerror="this.style.display='none'">
+      <div class="d-hero-fb" style="background:linear-gradient(135deg,${it.bg[0]},${it.bg[1]})">${it.ico}</div>
+      <div class="d-hero-ov">
+        <span class="d-badge">✦ ${dCat}</span>
+        <div class="d-htitle">${it.title}</div>
+        <div class="d-hyear">${it.year} · ${it.dur}</div>
+      </div>
+    </div>
+    <div class="d-sec"><p class="d-desc">${it.desc}</p></div>
+    <div class="d-imgrid">${(it.imgs||[]).map((src,i)=>`
+      <div class="d-iitem">
+        <img src="${src}" alt="${it.title} ${i+1}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="d-iitem-fb" style="display:none">${it.ico}</div>
+      </div>`).join('')}
+    </div>
+    <hr class="d-div">
+    <div class="d-sec"><div class="d-meta">${Object.entries(it.meta).map(([k,v])=>`<div><div class="d-mk">${k}</div><div class="d-mv">${v}</div></div>`).join('')}</div></div>
+    <div class="d-tags">${it.tags.map(t=>`<span class="d-tag">${t}</span>`).join('')}</div>`;}
+function navD(dir){dIdx=(dIdx+dir+DATA[dCat].length)%DATA[dCat].length;renderD()}
+function closeDetail(){document.getElementById('dovl').classList.remove('open')}
+function closeDOvl(e){if(e.target===document.getElementById('dovl'))closeDetail()}
+
+// ── CONTACT FORM ──────────────────────────────────────────────────
+function sendContact(){
+  const name=document.getElementById('cf-name').value.trim();
+  const email=document.getElementById('cf-email').value.trim();
+  const msg=document.getElementById('cf-msg').value.trim();
+  if(!name&&!email&&!msg)return;
+  // CHANGE THIS EMAIL:
+  const to='yourname@email.com';
+  const sub=encodeURIComponent('Portfolio Contact'+(name?' from '+name:''));
+  const body=encodeURIComponent((name?'From: '+name+'\n':'')+(email?'Email: '+email+'\n\n':'')+(msg||''));
+  window.open('mailto:'+to+'?subject='+sub+'&body='+body);
+  document.getElementById('csent').style.display='block';
+  setTimeout(()=>{document.getElementById('csent').style.display='none';},4000);
+}
+
+// ── NAV ───────────────────────────────────────────────────────────
+function goAbout(){document.getElementById('vp').classList.add('to-about');syncD(1)}
+function goMain(){document.getElementById('vp').classList.remove('to-about');syncD(0)}
+function syncD(i){document.querySelectorAll('.dot').forEach((d,j)=>d.classList.toggle('on',j===i))}
+document.getElementById('cmain').addEventListener('click',goAbout);
+document.querySelectorAll('#ndots .dot').forEach((d,i)=>d.addEventListener('click',()=>i?goAbout():goMain()));
+
+// ── FISH FEEDING ──────────────────────────────────────────────────
+document.getElementById('main').addEventListener('contextmenu',e=>{
+  e.preventDefault();
+  const rect=document.getElementById('main').getBoundingClientRect();
+  const px=(e.clientX-rect.left)/rect.width*100,py=(e.clientY-rect.top)/rect.height*100;
+  const p=document.createElement('div');p.className='pellet';p.style.cssText=`left:${px}%;top:${py}%`;
+  document.getElementById('main').appendChild(p);
+  const food={x:px,y:py,eaten:false,eat(){this.eaten=true;p.classList.add('eaten');setTimeout(()=>p.remove(),500)}};
+  const free=FISH.filter(f=>!f.food);
+  if(free.length){const n=free.reduce((a,b)=>Math.abs(a.x-px)+Math.abs(a.baseY-py)<Math.abs(b.x-px)+Math.abs(b.baseY-py)?a:b);n.food=food;}
+  setTimeout(()=>{if(!food.eaten)food.eat()},8000);
+});
+
+// ── CLOCK ─────────────────────────────────────────────────────────
+const clk=()=>document.getElementById('tbclk').textContent=new Date().toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'});
+setInterval(clk,1000);clk();
+
+// ── MUSIC ─────────────────────────────────────────────────────────
+let AC=null,musicOn=false;
+function getAC(){if(!AC)AC=new(window.AudioContext||window.webkitAudioContext)();return AC}
+function kNote(freq,t,dur,vol=.1){
+  const ac=getAC(),o=ac.createOscillator(),g=ac.createGain();
+  const buf=ac.createBuffer(2,ac.sampleRate*.6,ac.sampleRate);
+  for(let ch=0;ch<2;ch++){const d=buf.getChannelData(ch);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,2.3)}
+  const rv=ac.createConvolver();rv.buffer=buf;o.connect(g);g.connect(rv);rv.connect(ac.destination);
+  o.type='triangle';o.frequency.value=freq;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vol,t+.025);g.gain.exponentialRampToValueAtTime(.001,t+dur);o.start(t);o.stop(t+dur+.15);}
+const SC=[293.66,329.63,392,440,523.25,587.33,659.25,783.99];
+function melody(){if(!musicOn)return;const ac=getAC(),t=ac.currentTime;
+  [0,2,4,5,4,2,0,3,5,7,5,3,2,4,2,0].forEach((n,i)=>{
+    if(Math.random()>.3)kNote(SC[n%8],t+i*.44,1.1,.09);
+    if(Math.random()>.55)kNote(SC[(n+4)%8]*2,t+i*.44+.22,.55,.04);});
+  setTimeout(melody,7400);}
+document.getElementById('mbtn').addEventListener('click',()=>{getAC();musicOn=!musicOn;
+  document.getElementById('mbtn').classList.toggle('on',musicOn);
+  document.getElementById('mbtn').textContent=musicOn?'♫':'♪';if(musicOn)melody();});
+
+// ── NIGHT MODE ────────────────────────────────────────────────────
+function toggleNightMode() {
+  document.body.classList.toggle('night');
+  const isNight = document.body.classList.contains('night');
+  document.getElementById('tbtn').textContent = isNight ? '☀️' : '🌙';
+}
+
+// Click vào nút dưới taskbar
+document.getElementById('tbtn').addEventListener('click', toggleNightMode);
+// ── KEYBOARD ──────────────────────────────────────────────────────
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){closeDetail();closeAllWins()}
+  if(e.key==='ArrowLeft')goMain();if(e.key==='ArrowRight')goAbout();
+  if(document.getElementById('dovl').classList.contains('open')){
+    if(e.key==='ArrowUp')navD(-1);if(e.key==='ArrowDown')navD(1);}});
+
+// ── BOOT SCREEN LOGIC ─────────────────────────────────────────────
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('boot-screen').classList.add('fade-out-boot');
+  }, 4500); // Đợi 4.5s rồi mờ đi
+});
+
+// ── SAKURA RAIN BUTTON ────────────────────────────────────────────
+let petalsOn = false;
+document.getElementById('pbtn').addEventListener('click', () => {
+  petalsOn = !petalsOn;
+  
+  // Đổi màu nút khi bật
+  document.getElementById('pbtn').classList.toggle('on', petalsOn);
+  
+  // Kích hoạt mưa hoa
+  document.getElementById('main').classList.toggle('falling', petalsOn);
+  
+  // Thêm âm thanh click retro cho nút (nếu bạn đã làm ở bước trước)
+  if (typeof playSound === 'function') playSound('click');
+});
+</script>
+</body>
+</html>
