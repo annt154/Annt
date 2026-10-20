@@ -154,6 +154,9 @@ function openOverlay(cat){
   ov.scrollTop = 0;
 }
 function closeOverlay(){
+  if(document.getElementById('overlay').dataset.category === 'showreel'){
+    document.getElementById('ov-body').innerHTML = '';
+  }
   document.getElementById('overlay').classList.remove('open');
   cancelFishing();
   selectFish(null);
