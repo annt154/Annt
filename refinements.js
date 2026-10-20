@@ -10,7 +10,7 @@
   soundFish.querySelector('.flabel').textContent = '3D';
   soundFish.setAttribute('aria-label', 'Open 3D album');
   const titleRenderer = window.illustratedTitle;
-  window.illustratedTitle = (id, label) => id === 'graphic' ? '<span class="illustrated-title combined-category-title">Graphic &amp; art</span>' : titleRenderer(id, label);
+  window.illustratedTitle = (id, label) => id === 'graphic' ? '<svg class="illustrated-title" role="img" aria-label="Graphic &amp; art" viewBox="0 0 1560 300" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="category-graphic-word"><rect width="940" height="300"/></clipPath><clipPath id="category-art-word"><rect x="1150" y="12" width="410" height="276"/></clipPath></defs><g clip-path="url(#category-graphic-word)"><image href="assets/titles/Untitled_Artwork 20.png" x="-170" y="-575" width="2266" height="1488"/></g><text x="1035" y="230" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="220" fill="#ff9a61" stroke="#3d2812" stroke-width="5" paint-order="stroke">&amp;</text><g clip-path="url(#category-art-word)"><image href="assets/titles/Untitled_Artwork 9.png" x="776" y="-570" width="2266" height="1488"/></g></svg>' : titleRenderer(id, label);
   const education = document.querySelector('.cloud-facts > section:first-child p');
   education.innerHTML = 'Bachelor of Design<br><span class="education-location">(Digital Media)</span><br><span class="education-years">2023&ndash;present</span>';
   const blenderIcon = document.querySelector('.software-icons .procreate');
@@ -143,7 +143,28 @@
 })();
 
 // Calm typographic artwork while a preview is unavailable.
+// The detached Image loader bypasses native loading="lazy". Start it only
+// when a thumbnail approaches the visible panel, and release removed cards.
+const pendingCatalogPreviews = new Map();
+const catalogPreviewObserver = typeof IntersectionObserver === 'function' ? new IntersectionObserver(entries=>{
+ entries.forEach(entry=>{
+  if(!entry.isIntersecting)return;
+  const start=pendingCatalogPreviews.get(entry.target);
+  pendingCatalogPreviews.delete(entry.target);
+  catalogPreviewObserver.unobserve(entry.target);
+  if(start)start();
+ });
+},{rootMargin:'200px'}) : null;
+new MutationObserver(()=>{
+ pendingCatalogPreviews.forEach((start,image)=>{
+  if(image.isConnected)return;
+  catalogPreviewObserver.unobserve(image);
+  pendingCatalogPreviews.delete(image);
+ });
+}).observe(document.getElementById('ov-body'),{childList:true,subtree:true});
 window.catalogImage = function(image,item){
+ if(catalogPreviewObserver)catalogPreviewObserver.unobserve(image);
+ pendingCatalogPreviews.delete(image);
  const request=Symbol();image.previewRequest=request;
  const escape=s=>String(s).replace(/[<>&"']/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&apos;'}[c]));
  const title=escape(item.title||'Project');
@@ -162,5 +183,9 @@ window.catalogImage = function(image,item){
    if(image.previewRequest===request)image.src=candidate;
   };
   loader.onerror=loadNext;loader.src=candidate;
- };loadNext();
+ };
+ if(image.loading==='lazy' && catalogPreviewObserver){
+  pendingCatalogPreviews.set(image,loadNext);
+  catalogPreviewObserver.observe(image);
+ }else loadNext();
 };

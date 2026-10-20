@@ -2062,30 +2062,31 @@ class Koi {
     setTimeout(()=>{this.turning=false;},300);
   }
   playCaught() { this.caught = true; this.el.classList.add('caught'); setTimeout(() => { this.el.classList.remove('caught'); this.caught = false }, 700) }
-  tick(t) {
+  measure() {
+    const scene = this.el.closest('.scene');
+    const width = scene.clientWidth;
+    const box = this.el.getBoundingClientRect();
+    const visibleRatio = {k1:.964,k2:.686,k3:.749,k4:.491,k5:.935}[this.el.id] || 1;
+    const inset = (this.el.querySelector('.fish-img').offsetWidth * visibleRatio - box.width) / 2 - 3;
+    const minX = inset / width * 100;
+    return {minX, maxX:Math.max(minX, (width - box.width - inset) / width * 100), maxY:this.maxSkyY()};
+  }
+  tick(t, bounds) {
     if (this.caught) return;
+    const {minX, maxX, maxY} = bounds;
     if (this.food) {
       const dx = this.food.x - this.x;
       if (Math.abs(dx) < 7) { this.food.eat(); this.food = null; }
       else {
         const want = dx > 0 ? 1 : -1; if (want !== this.facing && !this.turning) { this.turn(); return; }
         if (!this.turning) this.vx = want * Math.min(Math.abs(this.vx) * 1.3, .35);
-        const foodY = Math.min(this.food.y, this.maxSkyY());
+        const foodY = Math.min(this.food.y, maxY);
         this.baseY += (foodY - this.baseY) * .005;
       }
     }
-    const scene = this.el.closest('.scene');
-    const width = scene.clientWidth;
-    const sprite = this.el.querySelector('.fish-img').getBoundingClientRect();
-    const box = this.el.getBoundingClientRect();
-    const visibleRatio = {k1:.964,k2:.686,k3:.749,k4:.491,k5:.935}[this.el.id] || 1;
-    const inset = (this.el.querySelector('.fish-img').offsetWidth * visibleRatio - box.width) / 2 - 3;
-    const minX = inset / width * 100;
-    const maxX = Math.max(minX, (width - box.width - inset) / width * 100);
     this.x = Math.max(minX, Math.min(maxX, this.x));
     if (!this.turning && ((this.x >= maxX-.2 && this.vx > 0) || (this.x <= minX+.2 && this.vx < 0))) { this.food=null; this.turn(); }
     this.x = Math.max(minX, Math.min(maxX, this.x + this.vx));
-    const maxY = this.maxSkyY();
     this.baseY = Math.max(1, Math.min(maxY, this.baseY));
     const y = Math.max(1, Math.min(maxY, this.baseY + this.amp * Math.sin(t * this.bspd + this.ph)));
     this.el.style.left = this.x + '%'; this.el.style.top = y + '%';
@@ -2207,7 +2208,12 @@ document.getElementById('cabt').addEventListener('keydown', e => {
 });
 
 const FISH = [new Koi('k1', 8, 2, .09, 3.2), new Koi('k2', 68, 18, -.09, 2.6), new Koi('k3', 18, 33, .07, 2.1), new Koi('k4', 62, 34, -.065, 2.4), new Koi('k5', 40, 8, .055, 2.8)];
-(function anim(ts) { FISH.forEach(f => f.tick(ts * .001)); requestAnimationFrame(anim) })(0);
+// Read every fish's geometry before any position writes to avoid repeated layouts.
+(function anim(ts) {
+  const bounds = FISH.map(f => f.caught ? null : f.measure());
+  FISH.forEach((f, i) => f.tick(ts * .001, bounds[i]));
+  requestAnimationFrame(anim);
+})(0);
 
 document.getElementById('main').addEventListener('contextmenu', e => {
   e.preventDefault();
@@ -2748,7 +2754,7 @@ update();
  #overlay .overlay-inner .category-panel h3,#overlay .overlay-inner .article-rail .article-rail-title,
  #overlay .overlay-inner .article-index .article-index-title{font-size:19px!important}
 }
-</style><link rel="stylesheet" href="catalog.css"><script src="catalog.js?v=20261004-original-thumbnails"></script><link rel="stylesheet" href="sun.css"><script src="sun.js?v=20261019-editorial"></script><link rel="stylesheet" href="refinements.css?v=20261020-blender"></script><link rel="stylesheet" href="case-studies.css"><script src="refinements.js?v=20261020-3d-gallery"></script><script src="case-media.js"></script><script src="case-studies.js?v=20261004-final-videos"></script><script src="water.js?v=20261020-fed-square-screening"></script><link rel="stylesheet" href="nostalgia.css?v=20260929">
+</style><link rel="stylesheet" href="catalog.css"><script src="catalog.js?v=20261004-original-thumbnails"></script><link rel="stylesheet" href="sun.css"><script src="sun.js?v=20261019-editorial"></script><link rel="stylesheet" href="refinements.css?v=20261020-blender"></script><link rel="stylesheet" href="case-studies.css"><script src="refinements.js?v=20261020-gallery-performance"></script><script src="case-media.js"></script><script src="case-studies.js?v=20261004-final-videos"></script><script src="water.js?v=20261020-fed-square-screening"></script><link rel="stylesheet" href="nostalgia.css?v=20260929">
 <link rel="stylesheet" href="aqua-blog.css?v=20260929-fixed-shell">
 <link rel="stylesheet" href="old-blog.css?v=20261005-soft-edge">
 <script src="old-blog.js?v=20260930-7"></script>
@@ -2760,5 +2766,5 @@ update();
 <script src="underforest-player.js?v=20261004"></script>
 <link rel="stylesheet" href="underforest.css?v=20261004-scroll-ink">
 <script src="underforest.js?v=20261004"></script>
-<link rel="stylesheet" href="blog-panels.css?v=20261019"><link rel="stylesheet" href="screen-blog.css?v=20261020-graphic-gallery"><script src="screen-blog.js?v=20261020-graphic-gallery"></script></body>
+<link rel="stylesheet" href="blog-panels.css?v=20261019"><link rel="stylesheet" href="screen-blog.css?v=20261020-plain-gallery"><script src="screen-blog.js?v=20261020-graphic-gallery"></script></body>
 </html>
