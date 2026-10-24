@@ -142,50 +142,28 @@
  window.renderProjectMedia=(item,cat)=>item.id==='odyssey'?'<figure class="case-figure"><img src="assets/works/TheOdyssey.jpeg" alt="The Odyssey projection installation"></figure>':render(item,cat);
 })();
 
-// Calm typographic artwork while a preview is unavailable.
-// The detached Image loader bypasses native loading="lazy". Start it only
-// when a thumbnail approaches the visible panel, and release removed cards.
-const pendingCatalogPreviews = new Map();
-const catalogPreviewObserver = typeof IntersectionObserver === 'function' ? new IntersectionObserver(entries=>{
- entries.forEach(entry=>{
-  if(!entry.isIntersecting)return;
-  const start=pendingCatalogPreviews.get(entry.target);
-  pendingCatalogPreviews.delete(entry.target);
-  catalogPreviewObserver.unobserve(entry.target);
-  if(start)start();
- });
-},{rootMargin:'200px'}) : null;
-new MutationObserver(()=>{
- pendingCatalogPreviews.forEach((start,image)=>{
-  if(image.isConnected)return;
-  catalogPreviewObserver.unobserve(image);
-  pendingCatalogPreviews.delete(image);
- });
-}).observe(document.getElementById('ov-body'),{childList:true,subtree:true});
+// Load the actual preview directly; artwork is only for failed images.
 window.catalogImage = function(image,item){
- if(catalogPreviewObserver)catalogPreviewObserver.unobserve(image);
- pendingCatalogPreviews.delete(image);
- const request=Symbol();image.previewRequest=request;
  const escape=s=>String(s).replace(/[<>&"']/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&apos;'}[c]));
  const title=escape(item.title||'Project');
  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675"><defs><linearGradient id="b" x2="1" y2="1"><stop stop-color="#223c40"/><stop offset="1" stop-color="#839b91"/></linearGradient></defs><rect width="1200" height="675" fill="url(#b)"/><g fill="none" stroke="#cdd8c4" opacity=".22"><ellipse cx="920" cy="300" rx="360" ry="210"/><ellipse cx="920" cy="320" rx="320" ry="170"/><ellipse cx="920" cy="340" rx="280" ry="130"/></g><text x="80" y="110" fill="#dce5d9" font-family="Arial,sans-serif" font-size="18" letter-spacing="5">SELECTED WORK</text><foreignObject x="80" y="315" width="1020" height="230"><div xmlns="http://www.w3.org/1999/xhtml" style="font:48px/1.15 Georgia,serif;color:#f9f7ed">${title}</div></foreignObject><text x="80" y="600" fill="#dce5d9" font-family="Arial,sans-serif" font-size="20">Preview forthcoming · Explore the project</text></svg>`;
  const fallback='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
- image.src=fallback;
- const src=catalogCover(item);if(!src)return;
- const candidates=[src];
- if(src.includes('/maxresdefault.jpg')) candidates.push(src.replace('/maxresdefault.jpg','/hqdefault.jpg'));
+ const src=catalogCover(item);
+ const candidates=src?[src]:[];
+ if(src && src.includes('/maxresdefault.jpg')) candidates.push(src.replace('/maxresdefault.jpg','/hqdefault.jpg'));
  if(item.cover&&!candidates.includes(item.cover)) candidates.push(item.cover);
+ image.decoding='async';
+ image.style.opacity='0';
+ const reveal=()=>{image.style.opacity='';};
  const loadNext=()=>{
-  const candidate=candidates.shift();if(!candidate||image.previewRequest!==request)return;
-  const loader=new Image();
-  loader.onload=()=>{
-   if(candidate.includes('/maxresdefault.jpg')&&loader.naturalWidth<480){loadNext();return;}
-   if(image.previewRequest===request)image.src=candidate;
+  const candidate=candidates.shift();
+  if(!candidate){image.onload=reveal;image.onerror=null;image.src=fallback;return;}
+  image.onload=()=>{
+   if(candidate.includes('/maxresdefault.jpg')&&image.naturalWidth<480){loadNext();return;}
+   reveal();
   };
-  loader.onerror=loadNext;loader.src=candidate;
+  image.onerror=loadNext;
+  image.src=candidate;
  };
- if(image.loading==='lazy' && catalogPreviewObserver){
-  pendingCatalogPreviews.set(image,loadNext);
-  catalogPreviewObserver.observe(image);
- }else loadNext();
+ loadNext();
 };

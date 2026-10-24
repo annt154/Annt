@@ -2,13 +2,13 @@ const legacyArtGallery = window.renderArtGallery;
 // Collection browsing is separate from the existing project detail renderer.
 function catalogCover(item) {
   const curated = {
-  "regret": "assets/works/thumbnails/regret.png",
-  "beyond": "assets/works/thumbnails/beyond.png",
-  "fresh": "assets/works/thumbnails/fresh.png",
-  "sun": "assets/works/thumbnails/sun.png",
-  "eyes": "assets/works/thumbnails/eyes.png",
-  "ud": "assets/works/thumbnails/ud.png",
-  "wof": "assets/works/thumbnails/wof.png"
+  "regret": "assets/works/thumbnails/regret-preview.jpg",
+  "beyond": "assets/works/thumbnails/beyond-preview.jpg",
+  "fresh": "assets/works/thumbnails/fresh-preview.jpg",
+  "sun": "assets/works/thumbnails/sun-preview.jpg",
+  "eyes": "assets/works/thumbnails/eyes-preview.jpg",
+  "ud": "assets/works/thumbnails/ud-preview.jpg",
+  "wof": "assets/works/thumbnails/wof-preview.jpg"
 };
   if (item.thumbnail || curated[item.id]) return item.thumbnail || curated[item.id];
   const embed = projectVideoEmbed(item.video);

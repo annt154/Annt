@@ -81,7 +81,10 @@
         if(offset>entries.length/2)offset-=entries.length;if(offset< -entries.length/2)offset+=entries.length;
         card.style.setProperty('--offset',offset);card.style.setProperty('--distance',Math.abs(offset));
         card.style.zIndex=String(10-Math.abs(offset));card.dataset.active=String(i===selected);
-        card.hidden=Math.abs(offset)>1;card.setAttribute('aria-pressed',String(i===selected));
+        card.hidden=Math.abs(offset)>1;
+        const preview=card.querySelector('img');
+        if(Math.abs(offset)<=1){preview.fetchPriority=i===selected?'high':'auto';preview.loading='eager';}
+        card.setAttribute('aria-pressed',String(i===selected));
       });
       filmTitle.textContent=entries[selected].item.title;subtitle.textContent=entries[selected].item.subtitle||'';
       count.textContent=String(selected+1).padStart(2,'0')+' / '+String(entries.length).padStart(2,'0');
