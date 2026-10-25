@@ -90,6 +90,22 @@
       count.textContent=String(selected+1).padStart(2,'0')+' / '+String(entries.length).padStart(2,'0');
       open.onclick=entries[selected].open;previous.disabled=next.disabled=entries.length<2;
     }
+    // Horizontal gestures browse; vertical gestures remain native page scrolling.
+    let gesture=null,suppressClickUntil=0;
+    reel.style.touchAction='pan-y';
+    reel.addEventListener('pointerdown',event=>{
+      if(event.pointerType==='mouse'||!event.isPrimary)return;
+      gesture={id:event.pointerId,x:event.clientX,y:event.clientY};
+    });
+    reel.addEventListener('pointerup',event=>{
+      if(!gesture||gesture.id!==event.pointerId)return;
+      const dx=event.clientX-gesture.x,dy=event.clientY-gesture.y;gesture=null;
+      if(Math.abs(dx)>=40&&Math.abs(dx)>Math.abs(dy)*1.4){
+        suppressClickUntil=Date.now()+500;select(selected+(dx<0?1:-1));
+      }
+    });
+    reel.addEventListener('pointercancel',()=>{gesture=null;});
+    reel.addEventListener('click',event=>{if(Date.now()<suppressClickUntil){event.preventDefault();event.stopImmediatePropagation();}},true);
     previous.onclick=()=>select(selected-1);next.onclick=()=>select(selected+1);
     reel.addEventListener('keydown',event=>{if(event.key==='ArrowLeft'||event.key==='ArrowRight'){event.preventDefault();select(selected+(event.key==='ArrowLeft'?-1:1));cards[selected].focus({preventScroll:true});}});
     layout.append(reel,navigation,caption);select(selected);

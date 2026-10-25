@@ -694,3 +694,14 @@
 #overlay .forest-combined-player{width:100%;padding:0!important}
 #overlay .forest-channel-grid>div{min-width:0}
 @media(max-width:750px){#overlay .water-experiments,#overlay .forest-channel-grid{grid-template-columns:1fr}}
+
+#overlay .entry-columns .screen-reading .forest-storyboards figure{width:100%!important;margin:22px 0!important}
+#overlay .entry-columns .screen-reading .forest-storyboards img{width:100%!important;height:auto!important;max-height:none!important}
+#overlay .forest-projector-tests{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+@media(max-width:750px){
+ #overlay .overlay-inner.screen-library .album-layout.film-library{height:auto!important;min-height:0!important;grid-template-rows:auto auto auto!important;overflow:visible!important}
+ #overlay .screen-library .film-library>.film-reel{height:auto!important;min-height:0!important;aspect-ratio:1/1;width:100%!important;align-self:start!important;overflow:hidden;touch-action:pan-y}
+ #overlay .screen-library .film-reel .film-poster{width:76%!important;height:auto!important;aspect-ratio:1/1;top:8%!important;bottom:auto!important}
+ #overlay .screen-library .film-reel .film-poster img{width:100%!important;height:100%!important;object-fit:cover}
+ #overlay .forest-projector-tests{grid-template-columns:1fr}
+}

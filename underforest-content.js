@@ -23,7 +23,7 @@ window.UNDER_FOREST = {
     "sound": "The sound begins with close, claustrophobic textures such as grass movement, whispers and low-frequency rumbling. It gradually expands across the space as the visual environment becomes larger.",
     "sound2": "Panning, reverb and equalisation were used to support the movement between the three screens. The final footstep was given greater weight through low-frequency treatment and studio reverb.",
     "ai": "The environment combines footage captured with a 360° camera, original visual development and selected AI-assisted environmental assets. AI-generated material was treated as source material and was subsequently selected, edited, colour-graded, animated and composited into the final environment.",
-    "ai2": "An AI-generated installation visualisation was also used during planning to communicate the proposed C-shaped spatial arrangement.",
+    "ai2": "An AI-generated installation visualisation was also used during planning to communicate the proposed U-shaped spatial arrangement.",
     "reflection": "This project strengthened my understanding of multiplane animation, 360° video, compositing and spatial presentation. It also showed that an immersive work must be designed across both time and physical space.",
     "reflection2": "The most important challenge was maintaining continuity between different visual formats and across three projections. Testing the installation revealed how scale, screen division, lighting consistency and sound positioning can change the audience’s sense of presence."
   },
