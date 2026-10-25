@@ -3882,6 +3882,17 @@ body:has(#overlay.open) .shore-nav {visibility:hidden}
 
 /* Artist-supplied transparent pixel cursor, with the tip as hotspot. */
 @media (hover: hover) and (pointer: fine) {
-  html, body, body * { cursor: url("assets/brand/fish-cursor.png?v=20261025") 2 2, auto !important; }
+  html, body, body * { cursor: url("assets/brand/ivory-cursor.png?v=20261025") 2 2, auto !important; }
   input, textarea, [contenteditable="true"] { cursor: text !important; }
+}
+
+/* Water: align the copy with the image measure; pair the opening photograph and overview. */
+#overlay .entry-columns .screen-reading .water-case :is(.case-copy,.water-narrow){max-width:none!important;width:100%;box-sizing:border-box}
+#overlay .entry-columns .screen-reading .water-editorial-intro{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(24px,3vw,44px);align-items:start}
+#overlay .entry-columns .screen-reading .water-editorial-intro>figure{margin:0!important;width:100%!important;min-width:0}
+#overlay .entry-columns .screen-reading .water-editorial-intro>figure img{width:100%!important;height:auto!important;max-height:none!important;object-fit:contain!important}
+#overlay .entry-columns .screen-reading .water-editorial-intro>div{min-width:0}
+#overlay .entry-columns .screen-reading .water-editorial-intro p{margin:0!important;padding:0!important}
+@media(max-width:1100px){
+ #overlay .entry-columns .screen-reading .water-editorial-intro{grid-template-columns:1fr;gap:24px}
 }
