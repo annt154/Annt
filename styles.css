@@ -3879,3 +3879,9 @@ body:has(#overlay.open) .shore-nav {visibility:hidden}
 @media(max-width:750px){
  #overlay .entry-columns .screen-reading .entry-section.entry-credits>h2{margin-top:-43px!important}
 }
+
+/* Artist-supplied transparent pixel cursor, with the tip as hotspot. */
+@media (hover: hover) and (pointer: fine) {
+  html, body, body * { cursor: url("assets/brand/cursor.png?v=20261025") 2 2, auto !important; }
+  input, textarea, [contenteditable="true"] { cursor: text !important; }
+}
