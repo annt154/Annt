@@ -3882,6 +3882,6 @@ body:has(#overlay.open) .shore-nav {visibility:hidden}
 
 /* Artist-supplied transparent pixel cursor, with the tip as hotspot. */
 @media (hover: hover) and (pointer: fine) {
-  html, body, body * { cursor: url("assets/brand/shell-cursor.png?v=20261025") 2 2, auto !important; }
+  html, body, body * { cursor: url("assets/brand/fish-cursor.png?v=20261025") 2 2, auto !important; }
   input, textarea, [contenteditable="true"] { cursor: text !important; }
 }
