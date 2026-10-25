@@ -43,7 +43,7 @@ const DATA = {
       tags:['Motion design','After Effects','Title Sequence'],
       cover:'assets/works/eeaao-cover.jpg', gallery:['assets/works/eeaao-1.jpg','assets/works/eeaao-2.jpg'],
       sections:[
-        {h:'Overview', p:`This project is an unofficial title-sequence study inspired by Everything Everywhere All at Once. The sequence uses the film's main symbols, colours and multiverse structure to move from chaos and nihilism towards connection and hope.`},
+        {h:'Overview', p:`This project is a title-sequence study inspired by Everything Everywhere All at Once. The sequence uses the film's main symbols, colours and multiverse structure to move from chaos and nihilism towards connection and hope.`},
         {h:'Analysing the Main Symbols', p:`The concept focuses on two contrasting symbols: the Everything Bagel and the googly eye. The Bagel is dark, circular and visually similar to a black hole — it represents nihilism, the belief that nothing has meaning. The googly eye reverses this image; its white surface and black centre suggest a more playful, optimistic way of seeing the same world. Together, the two symbols create a visual Yin–Yang: giving up because nothing matters, or choosing kindness because meaning can still be created.`},
         {h:'Narrative Structure', p:`The title sequence moves through changing colours, symbols and layers to represent verse-jumping across the multiverse. Although it begins with visual chaos, it gradually returns to the simple relationship between the characters — reflecting the film's movement from an overwhelming universe towards a human, emotional centre.`},
         {h:'Visual Language', p:`Bright and saturated colours represent the different universes and the constant movement between them. These colours are balanced with the black-and-white design of the Bagel and googly eye, keeping the main philosophy visible even as the compositions grow more chaotic.`},
@@ -64,15 +64,15 @@ const DATA = {
       ] }
 ,
     { id:'beyond', video:'', title:'Beyond the frame', subtitle:'Experimental Film', year:'2025', age:'19',
-      tags:['Solo Project','Cinematography','VFX','Sound Design'],
+      tags:['Collaboration','Concept Development','Visual Development'],
       cover:'assets/works/TheOdyssey.jpeg', gallery:['assets/works/beyond-1.jpg','assets/works/beyond-2.jpg'],
       sections:[
-        {h:'Overview', p:`Beyond the Frame is a solo experimental film exploring the sublime — the feeling created when fear, beauty and awe exist at the same time. The project marked a change in my creative practice: instead of using fear only to create discomfort, the work uses it as a path towards wonder, liberation and transcendence.`},
+        {h:'Overview', p:`Beyond the Frame is a collaborative experimental film exploring the sublime — the feeling created when fear, beauty and awe exist at the same time. The project marked a change in my creative practice: instead of using fear only to create discomfort, the work uses it as a path towards wonder, liberation and transcendence.`},
         {h:'Concept: The Sublime', p:`The concept was influenced by the theories of Edmund Burke and Immanuel Kant. The sublime appears when a person encounters something so vast, powerful or unfamiliar that it cannot be fully understood — the experience may begin with fear, but can later become awe once the viewer realises they are observing it from a place of safety. Beyond the Frame follows this emotional movement, beginning within a limited, familiar visual space before gradually expanding into something larger and more overwhelming.`},
         {h:'Visual Development', p:`Slow camera movements and quiet natural imagery create a calm beginning. As the film develops, the frame becomes brighter, wider and less physically defined. The transition into an infinite white space represents movement beyond limitation — instead of a clear destination, the empty space lets the viewer imagine something larger than the visible frame.`},
         {h:'The Starburst Effect', p:`The starburst sequence was inspired by the wormhole scene in 2001: A Space Odyssey. It began as a technical experiment in stretching light, colour and movement beyond the edges of the frame, later becoming the main transition between the physical environment and the abstract white space — a release from the boundaries of the original frame, a shift from fear towards awe.`},
         {h:'Sound Design', p:`The sound begins with soft, familiar natural recordings that gradually develop into a wider, more overwhelming soundscape. Layering, volume and spatial depth were used to make the environment feel as though it was expanding beyond the screen.`},
-        {h:'Making the Work', p:`Beyond the Frame was completed as a solo project. I handled all stages of production, including cinematography, editing, colour grading, visual effects and sound-design layering.`},
+        {h:'Making the Work', p:`Beyond the Frame was created with My Le (visual development) and Mai Nguyen (sound). My contribution was concept, idea development and visual development.`},
         {h:'Reflection', p:`This project changed how I understood fear within my creative practice. Fear does not always need to end in discomfort; it can also lead towards curiosity, freedom and awe. The process also strengthened my confidence in cinematography, colour grading, visual effects and sound design.`}
       ] }
   ],

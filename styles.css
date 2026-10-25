@@ -3896,3 +3896,18 @@ body:has(#overlay.open) .shore-nav {visibility:hidden}
 @media(max-width:1100px){
  #overlay .entry-columns .screen-reading .water-editorial-intro{grid-template-columns:1fr;gap:24px}
 }
+
+/* The Sun: balanced editorial columns and consistent text/image measures. */
+#overlay .entry-columns .screen-reading .sun-case p{max-width:none!important;width:100%;box-sizing:border-box}
+#overlay .entry-columns .screen-reading .sun-case>.sun-two-col{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:32px!important;align-items:center!important}
+#overlay .entry-columns .screen-reading .sun-case>.sun-concept{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)!important}
+#overlay .entry-columns .screen-reading .sun-case>.sun-two-col>figure{margin:0!important;align-self:center!important}
+#overlay .entry-columns .screen-reading .sun-case>.sun-two-col>figure img{width:100%!important;height:auto!important;max-height:none!important;object-fit:contain!important}
+#overlay .entry-columns .screen-reading .sun-process-image{display:block;width:100%;height:auto}
+#overlay .entry-columns .screen-reading .sun-narrative{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:0 32px;align-items:start}
+#overlay .entry-columns .screen-reading .sun-narrative>h2{grid-column:1/-1}
+#overlay .entry-columns .screen-reading .sun-narrative>p{margin:0!important;padding:0!important}
+#overlay .entry-columns .screen-reading .sun-narrative>.sun-sequence{margin:0!important;min-width:0}
+@media(max-width:1100px){
+ #overlay .entry-columns .screen-reading .sun-case>.sun-two-col,#overlay .entry-columns .screen-reading .sun-case>.sun-concept,#overlay .entry-columns .screen-reading .sun-narrative{grid-template-columns:1fr!important;gap:22px!important}
+}

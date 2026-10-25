@@ -31,17 +31,17 @@ window.PORTFOLIO_CONTENT = {
   },
   beyond: {
     video:'https://youtu.be/G0cSvIk3nr0',
-    title:'Beyond the Frame', subtitle:'Solo Experimental Short Film', year:'2025',
-    role:'Cinematography, editing, colour grading, visual effects and sound-design layering', tools:'Software details to be confirmed',
-    overview:'Beyond the Frame is my solo experimental film about the sublime: the moment when fear, beauty and awe begin to exist together.',
+    title:'Beyond the Frame', subtitle:'Collaborative Experimental Short Film', year:'2025',
+    role:'Concept, idea development and visual development', tools:'Software details to be confirmed',
+    overview:'Beyond the Frame is an experimental film created in collaboration with My Le (visual development) and Mai Nguyen (sound). I contributed the concept, idea development and visual development. The film explores the sublime: the moment when fear, beauty and awe begin to exist together.',
     sections:[
       ['Concept','I wanted to understand whether fear must always end in discomfort, or whether it can lead towards curiosity and liberation.'],
       ['Visual development','The film begins in a quiet, limited environment. I gradually open that space through light and abstraction, moving towards an infinite white space.'],
       ['The starburst experiment','The wormhole scene in 2001: A Space Odyssey influenced this sequence. I used it as a transition between the physical world and something beyond the visible frame.'],
-      ['Process and sound','I completed the cinematography, editing, colour grading, visual effects and sound-design layering independently. Sound and image work together to carry the shift from a familiar space into abstraction.']
+      ['Process and sound','I developed the concept and ideas and worked on visual development with My Le. Mai Nguyen created the sound. Sound and image work together to carry the shift from a familiar space into abstraction.']
     ],
-    reflection:'This film changed how I understood fear in my work. It can open a path towards curiosity and awe. Making the film independently also helped me see how cinematography, editing, colour and sound shape one another.',
-    credits:'Film, editing, VFX and sound design by Thuy An Ngo. Created in 2025. The full film is available in the main player.'
+    reflection:'This film changed how I understood fear in my work. It can open a path towards curiosity and awe. Collaborating on the film also helped me see how visual development and sound shape one another.',
+    credits:'Concept, idea development and visual development: Thuy An Ngo. Visual development: My Le. Sound: Mai Nguyen. Created in 2025.'
   },
   fresh: {
     title:'Fresh Up', subtitle:'AI-Assisted Experimental Commercial', year:'2025',

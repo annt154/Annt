@@ -94,7 +94,7 @@
   };
   const conciseSections={
     eeaao:[
-      ['Overview','I created this unofficial title-sequence study around the symbols, colours and multiverse structure of Everything Everywhere All at Once.'],
+      ['Overview','I created this title-sequence study around the symbols, colours and multiverse structure of Everything Everywhere All at Once.'],
       ['Concept','I paired the Everything Bagel and the googly eye. Their reversed black-and-white forms helped me move between hopelessness and a more playful way of seeing the world.'],
       ['Visual development','Bright colour and layered compositions suggest different universes. I balanced this movement with the simpler circular symbols, then brought the sequence back towards human connection.'],
       ['Process','This was my first major After Effects project. I experimented with keyframes, masks and layers, then used timing and easing to connect movement with the soundtrack.'],
