@@ -116,7 +116,7 @@ const DATA = {
         {h:'Reflection', p:`This project helped me understand how fictional stories can be used to question real technological developments, and made me consider the risks of depending on technology for emotional regulation. AI may be able to simulate empathy, but it can also reproduce and amplify the emotions people are trying to escape.`}
       ] },
     { id:'juicy', title:'Juicy', subtitle:'Graphic design', year:'',
-      tags:['Graphic design'], cover:'assets/titles/juicy-cover.svg', gallery:[], sections:[] },
+      tags:['Graphic design'], cover:'assets/works/juicy.png', gallery:[], sections:[] },
   ],
   ui: [
     { id:'rose', title:'Rose vinyl', subtitle:'Interactive Web Music Player · UI/UX', year:'2025', age:'19',

@@ -28,10 +28,10 @@ window.UNDER_FOREST = {
     "reflection2": "The most important challenge was maintaining continuity between different visual formats and across three projections. Testing the installation revealed how scale, screen division, lighting consistency and sound positioning can change the audience’s sense of presence."
   },
   "media": {
-    "left": "",
-    "middle": "",
-    "right": "",
-    "combined": "",
+    "left": "https://youtu.be/bEPAH_95m_I",
+    "middle": "https://youtu.be/4F0JMXWakno",
+    "right": "https://youtu.be/wcu2-JSv5xw",
+    "combined": "https://youtu.be/mf9SgA-gNqQ",
     "poster": "assets/works/TheOdyssey.jpeg",
     "overview": "",
     "story": [

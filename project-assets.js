@@ -1,5 +1,6 @@
 // Existing local assets. Regenerate when adding project media.
 window.PORTFOLIO_ASSETS = [
+  "assets/works/juicy.png",
   "assets/works/thumbnails/regret.png",
   "assets/works/thumbnails/beyond.png",
   "assets/works/thumbnails/fresh.png",
