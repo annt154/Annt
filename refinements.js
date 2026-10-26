@@ -126,7 +126,7 @@
  const body=document.getElementById('ov-body');
  function frameImages(){
   body.querySelectorAll('.article-paper img').forEach(img=>{
-   if(img.closest('.underforest')||img.closest('.portfolio-study')||img.closest('.selection-frame')||img.closest('.illustrated-title')||img.classList.contains('rmit-logo'))return;
+   if(img.closest('.underforest')||img.closest('.water-motion-progress')||img.closest('.portfolio-study')||img.closest('.selection-frame')||img.closest('.illustrated-title')||img.classList.contains('rmit-logo'))return;
    const frame=document.createElement('span');frame.className='selection-frame';
    img.before(frame);frame.append(img);
    [[0,0],[50,0],[100,0],[0,50],[100,50],[0,100],[50,100],[100,100]].forEach(([x,y])=>{
