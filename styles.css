@@ -3977,3 +3977,6 @@ body:has(#overlay.open) .shore-nav {visibility:hidden}
 #overlay .entry-columns .screen-reading .water-case .water-motion-progress figure::before,#overlay .entry-columns .screen-reading .water-case .water-motion-progress figure::after{content:none!important;display:none!important}
 #overlay .entry-columns .screen-reading .water-case .water-motion-progress img{display:block;width:100%!important;height:auto!important;aspect-ratio:16/9;object-fit:cover!important;border:0!important;outline:0!important;box-shadow:none!important;max-height:none!important}
 @media(max-width:650px){#overlay .entry-columns .screen-reading .water-case .water-motion-progress{grid-template-columns:1fr}}
+
+#overlay .entry-columns .screen-reading .post-webcomic{width:min(100%,720px);margin:28px auto;background:#000;overflow:hidden}
+#overlay .entry-columns .screen-reading .post-webcomic img{display:block!important;width:100%!important;height:auto!important;max-height:none!important;margin:0!important;padding:0!important;border:0!important;box-shadow:none!important;object-fit:contain!important}

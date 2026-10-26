@@ -125,6 +125,12 @@
   };
   function generic(item) {
     const p={...item,...additionalInfo[item.id]};
+    if(item.id==='post') {
+      p.subtitle='Speculative Scrolling Webcomic · Graphic Design';
+      const base='assets/works/posthumanism/';
+      const reader='<div class="post-webcomic" aria-label="Posthumanism — complete scrolling webcomic">'+Array.from({length:8},(_,i)=>`<img src="${base}page-${String(i+1).padStart(2,'0')}.jpg" alt="Posthumanism webcomic — page ${i+1} of 8" width="864" height="6480" loading="lazy" decoding="async">`).join('')+'</div>';
+      return heading(p)+info(p)+section('Webcomic',external(base+'posthumanism-webcomic.pdf','Open full webcomic PDF','experience-link')+reader)+section('Artist Statement',text('“Posthumanism”, a short webtoon read by scrolling rather than flipping pages, portraying a dystopian world 15 years in the future. When EEG Gen 3 AI begins to see user’s nightmares by implanting the chip into people’s brains and learning their negative emotions, it gradually becomes more human than the humans themselves and feels angry, wanting revenge. The story aims to highlight the dangers of AI, raising questions about identity and ethics. It is also a reminder to reflect on a society where people deal with mental health issues and pressure, to the point they choose to escape reality. Showing that everything can possibly happen.')+external(base+'artist-statement.pdf','Open Artist Statement PDF','experience-link'))+conciseSections.post.map(([h,t])=>section(h,text(t))).join('')+section('Credits',text(p.credits||'Thuy An Ngo'));
+    }
     let html=video(item.video,item.title+' — project video')||image(item.cover,item.title+' — main project image','Main project image',true)||note('Main project visual to be supplied.');
     html+=heading(p)+info(p);
     const images=(item.gallery||[]).filter(src=>assets.has(src)).slice(0,3);
