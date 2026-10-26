@@ -712,3 +712,17 @@
 #overlay .entry-columns .screen-reading .forest-transitions figure{width:100%!important;margin:0!important}
 #overlay .entry-columns .screen-reading .forest-transitions img{width:100%!important;height:auto!important;max-height:none!important}
 @media(max-width:600px){#overlay .forest-photoshop{grid-template-columns:1fr}}
+
+/* Compact contact sheets and matched process strips. */
+#overlay .forest-storyboards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+#overlay .entry-columns .screen-reading .forest-storyboards figure{min-width:0;margin:0!important}
+#overlay .entry-columns .screen-reading .forest-storyboards img{width:100%!important;height:auto!important;aspect-ratio:4/1;object-fit:contain!important;background:#fff}
+#overlay .forest-photoshop{grid-template-columns:repeat(2,minmax(0,1fr))}
+#overlay .entry-columns .screen-reading .forest-photoshop figure,#overlay .entry-columns .screen-reading .forest-photoshop figure img{border:0!important;outline:0!important;box-shadow:none!important;background:none!important}
+#overlay .forest-transitions,#overlay .forest-technical-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:start}
+#overlay .entry-columns .screen-reading :is(.forest-transitions,.forest-technical-gallery) figure{min-width:0;width:100%!important;margin:0!important}
+#overlay .entry-columns .screen-reading :is(.forest-transitions,.forest-technical-gallery) img{width:100%!important;height:auto!important;aspect-ratio:16/10;max-height:none!important;object-fit:contain!important;background:#080808!important}
+@media(max-width:600px){
+ #overlay .forest-storyboards{gap:10px}
+ #overlay .forest-transitions,#overlay .forest-technical-gallery{gap:10px;overflow-x:auto;grid-template-columns:repeat(3,minmax(180px,1fr));padding-bottom:10px}
+}

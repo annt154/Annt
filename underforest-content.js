@@ -33,7 +33,7 @@ window.UNDER_FOREST = {
     "right": "https://youtu.be/wcu2-JSv5xw",
     "combined": "https://youtu.be/mf9SgA-gNqQ",
     "poster": "assets/works/TheOdyssey.jpeg",
-    "overview": "",
+    "overview": "assets/works/macro-odyssey/overview.png",
     "story": [
       "",
       "",
