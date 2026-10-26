@@ -705,3 +705,10 @@
  #overlay .screen-library .film-reel .film-poster img{width:100%!important;height:100%!important;object-fit:cover}
  #overlay .forest-projector-tests{grid-template-columns:1fr}
 }
+
+#overlay .forest-photoshop{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
+#overlay .entry-columns .screen-reading .forest-photoshop img{height:300px!important;width:100%!important;object-fit:contain!important}
+#overlay .forest-transitions{display:grid;gap:24px}
+#overlay .entry-columns .screen-reading .forest-transitions figure{width:100%!important;margin:0!important}
+#overlay .entry-columns .screen-reading .forest-transitions img{width:100%!important;height:auto!important;max-height:none!important}
+@media(max-width:600px){#overlay .forest-photoshop{grid-template-columns:1fr}}
